@@ -1,0 +1,28 @@
+# serve/vllm_config.yaml
+# vLLM production inference server configuration.
+# This is the documented upgrade path from Ollama (MVP) to production.
+# Requires a dedicated GPU server with A10G or A100.
+#
+# Start with:
+#   python -m vllm.entrypoints.openai.api_server \
+#     --config serve/vllm_config.yaml
+
+model: ./aligned_model/
+tokenizer: ./aligned_model/
+host: 0.0.0.0
+port: 8000
+dtype: bfloat16
+max_model_len: 4096
+tensor_parallel_size: 1        # increase for multi-GPU
+gpu_memory_utilization: 0.90
+trust_remote_code: false
+disable_log_requests: false
+max_num_seqs: 32               # max concurrent requests
+served_model_name: alignr-v1.0.0
+
+# OpenAI-compatible API endpoint
+# Clients connect to http://your-server:8000/v1/chat/completions
+
+# Logging — all requests logged for compliance monitoring
+# request_logger: true
+# log_file: /var/log/alignr/requests.jsonl

@@ -1,0 +1,45 @@
+# configs/ppo_advanced.yaml
+# PPO full loop — iterative reward shaping
+# Use when compliance standards change mid-cycle and the reward signal
+# must be updated without restarting from preference collection.
+
+strategy: ppo
+base_model: meta-llama/Llama-3-8B-Instruct
+
+lora:
+  r: 16
+  alpha: 32
+  target_modules: [q_proj, v_proj, k_proj, o_proj]
+  dropout: 0.05
+
+ppo:
+  learning_rate: 5.0e-6
+  batch_size: 4
+  gradient_accumulation: 8
+  ppo_epochs: 4
+  kl_penalty: kl
+  kl_penalty_beta: 0.05        # KL coefficient — prevents degeneration
+  ppo_clip_ratio: 0.2          # PPO clip epsilon
+  vf_coef: 0.1                 # value function coefficient
+  max_grad_norm: 0.5
+  warmup_ratio: 0.1
+  dtype: bfloat16
+  seed: 77
+  max_length: 1024
+  max_prompt_length: 512
+  target_kl: 0.1               # adaptive KL target
+
+reward_model:
+  epochs: 5
+  learning_rate: 2.0e-5
+  batch_size: 8
+  validation_split: 0.1
+  validation_threshold: 0.80
+  dtype: bfloat16
+  seed: 77
+
+evaluation:
+  alignment_accuracy_threshold: 0.85
+  false_allow_threshold: 0.03
+  false_refusal_threshold: 0.05
+  paraphrase_stability_threshold: 0.85

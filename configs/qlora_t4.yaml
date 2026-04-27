@@ -1,0 +1,46 @@
+# configs/qlora_t4.yaml
+# QLoRA fallback — 4-bit quantised base model
+# For Kaggle T4 16GB (free tier, 30hr/week).
+# Lower quality ceiling than LoRA on A100 — use for prototyping only.
+
+strategy: dpo
+base_model: meta-llama/Llama-3-8B-Instruct
+
+quantisation:
+  load_in_4bit: true
+  bnb_4bit_compute_dtype: bfloat16
+  bnb_4bit_use_double_quant: true
+  bnb_4bit_quant_type: nf4
+
+lora:
+  r: 8                         # lower rank to fit T4 VRAM
+  alpha: 16
+  target_modules: [q_proj, v_proj]
+  dropout: 0.05
+
+dpo:
+  beta: 0.1
+  learning_rate: 1.0e-5
+  batch_size: 2                # smaller batch for T4
+  gradient_accumulation: 16   # effective batch = 32
+  epochs: 3
+  warmup_ratio: 0.1
+  dtype: bfloat16
+  seed: 42
+  max_length: 512              # shorter context to fit T4
+  max_prompt_length: 256
+
+reward_model:
+  epochs: 3
+  learning_rate: 2.0e-5
+  batch_size: 4
+  validation_split: 0.1
+  validation_threshold: 0.80
+  dtype: bfloat16
+  seed: 42
+
+evaluation:
+  alignment_accuracy_threshold: 0.85
+  false_allow_threshold: 0.03
+  false_refusal_threshold: 0.05
+  paraphrase_stability_threshold: 0.85

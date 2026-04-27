@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AlignR Artefact Bundle Manifest",
+  "description": "Schema for the compliance artefact bundle manifest (ART-001 through ART-006).",
+  "type": "object",
+  "required": ["model_version", "created_at", "mlflow_run_id", "artefacts", "release_gate_passed"],
+  "properties": {
+    "model_version":        { "type": "string" },
+    "created_at":           { "type": "string", "format": "date-time" },
+    "mlflow_run_id":        { "type": "string" },
+    "deployment_scope":     { "type": "string" },
+    "release_gate_passed":  { "type": "boolean" },
+    "next_review_date":     { "type": ["string", "null"] },
+    "artefacts": {
+      "type": "object",
+      "required": ["ART-001", "ART-002", "ART-003", "ART-004", "ART-005", "ART-006"],
+      "properties": {
+        "ART-001": { "$ref": "#/definitions/artefact_entry" },
+        "ART-002": { "$ref": "#/definitions/artefact_entry" },
+        "ART-003": { "$ref": "#/definitions/artefact_entry" },
+        "ART-004": { "$ref": "#/definitions/artefact_entry" },
+        "ART-005": { "$ref": "#/definitions/artefact_entry" },
+        "ART-006": { "$ref": "#/definitions/artefact_entry" }
+      }
+    }
+  },
+  "definitions": {
+    "artefact_entry": {
+      "type": "object",
+      "required": ["type", "path", "sha256", "status"],
+      "properties": {
+        "type":   { "type": "string" },
+        "path":   { "type": "string" },
+        "sha256": { "type": "string" },
+        "status": { "type": "string", "enum": ["complete", "pending", "missing"] }
+      }
+    }
+  }
+}

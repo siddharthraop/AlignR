@@ -1,0 +1,30 @@
+version: "3.9"
+
+# MLflow self-hosted tracking server + artefact store
+# MLflow UI: http://localhost:5000
+# Artefacts stored locally in ./mlflow-artefacts/
+
+services:
+  mlflow:
+    image: ghcr.io/mlflow/mlflow:v2.11.3
+    container_name: alignr-mlflow
+    ports:
+      - "5000:5000"
+    volumes:
+      - mlflow_artefacts:/mlflow/artefacts
+      - mlflow_db:/mlflow/db
+    command: >
+      mlflow server
+      --backend-store-uri sqlite:////mlflow/db/mlflow.db
+      --default-artifact-root /mlflow/artefacts
+      --host 0.0.0.0
+      --port 5000
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:5000/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  mlflow_artefacts:
+  mlflow_db:

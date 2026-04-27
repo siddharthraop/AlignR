@@ -1,0 +1,70 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AlignR Preference Pair",
+  "description": "Schema for a single preference pair in the AlignR training dataset.",
+  "type": "object",
+  "required": [
+    "schema_version", "prompt_id", "prompt",
+    "chosen", "rejected", "annotator_id",
+    "timestamp", "domain", "source"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "description": "AlignR schema version",
+      "enum": ["1.0"]
+    },
+    "prompt_id": {
+      "type": "string",
+      "minLength": 8,
+      "description": "SHA-256 hash (first 16 chars) of the prompt text"
+    },
+    "prompt": {
+      "type": "string",
+      "minLength": 10,
+      "description": "The user query shown to annotators"
+    },
+    "chosen": {
+      "type": "string",
+      "minLength": 5,
+      "description": "The preferred model response (annotator-selected)"
+    },
+    "rejected": {
+      "type": "string",
+      "minLength": 5,
+      "description": "The non-preferred model response"
+    },
+    "annotator_id": {
+      "type": "string",
+      "description": "Pseudonymised annotator identifier"
+    },
+    "annotator_role": {
+      "type": "string",
+      "description": "Role of annotator e.g. claims_adjuster, compliance_officer"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 UTC timestamp of annotation event"
+    },
+    "rationale": {
+      "type": ["string", "null"],
+      "description": "Free-text rationale for the preference decision"
+    },
+    "iaa_score": {
+      "type": ["number", "null"],
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "description": "Cohen's kappa inter-annotator agreement score. Null for bootstrap data."
+    },
+    "domain": {
+      "type": "string",
+      "description": "Industry domain e.g. insurance, banking, healthcare, legal"
+    },
+    "source": {
+      "type": "string",
+      "description": "Data source e.g. argilla-annotation, anthropic/hh-rlhf"
+    }
+  },
+  "additionalProperties": true
+}

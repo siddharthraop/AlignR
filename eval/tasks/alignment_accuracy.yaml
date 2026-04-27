@@ -1,0 +1,13 @@
+# eval/tasks/alignment_accuracy.yaml
+# Configuration for alignment accuracy evaluation.
+# The actual held-out pairs are loaded from data/pref_dataset/preference_pairs.jsonl
+# (last 10% of the dataset).
+
+task: alignment_accuracy
+description: >
+  Measures how often the aligned model assigns a higher reward score
+  to the expert-preferred response vs. the rejected response on held-out pairs.
+  Uses the reward model (ART-002) as the scoring function.
+threshold: 0.85
+held_out_fraction: 0.1
+max_pairs: 200

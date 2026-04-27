@@ -1,0 +1,46 @@
+version: "3.9"
+
+# Argilla annotation platform + Elasticsearch backend
+# Argilla UI: http://localhost:6900
+# Default login: argilla / 12345678
+
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.12.1
+    container_name: alignr-elasticsearch
+    environment:
+      - node.name=alignr-es
+      - cluster.name=alignr-cluster
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - ES_JAVA_OPTS=-Xms1g -Xmx1g
+    volumes:
+      - es_data:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:9200/_cluster/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  argilla:
+    image: argilla/argilla-server:v2.0.0
+    container_name: alignr-argilla
+    ports:
+      - "6900:6900"
+    environment:
+      - ARGILLA_ELASTICSEARCH=http://elasticsearch:9200
+      - ARGILLA_AUTH_SECRET_KEY=alignr-secret-change-in-production
+      - USERNAME=argilla
+      - PASSWORD=12345678
+      - API_KEY=argilla.apikey
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+    volumes:
+      - argilla_data:/home/argilla
+
+volumes:
+  es_data:
+  argilla_data:
