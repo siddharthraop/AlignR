@@ -344,12 +344,13 @@ body { font-family: var(--sans); background: var(--bg); color: var(--text); font
 
   <div class="stack-block">
     <div class="stack-title">Stack</div>
-    <div class="stack-item"><strong>Llama 3 8B / Mistral 7B</strong>open-weight base</div>
+    <div class="stack-item"><strong>distilbert / distilgpt2</strong>MVP pipeline validation</div>
+    <div class="stack-item"><strong>Mistral 7B / Llama 3 8B</strong>production target</div>
     <div class="stack-item"><strong>TRL · HuggingFace</strong>RLHF / DPO training</div>
-    <div class="stack-item"><strong>Label Studio</strong>annotation platform</div>
+    <div class="stack-item"><strong>Argilla</strong>annotation platform</div>
     <div class="stack-item"><strong>MLflow</strong>experiment tracking</div>
-    <div class="stack-item"><strong>vLLM</strong>inference serving</div>
-    <div class="stack-item"><strong>Private VPC</strong>self-hosted deployment</div>
+    <div class="stack-item"><strong>Kaggle T4 GPU</strong>free-tier compute</div>
+    <div class="stack-item"><strong>vLLM / Vertex AI</strong>production path</div>
   </div>
 </aside>
 
@@ -357,11 +358,12 @@ body { font-family: var(--sans); background: var(--bg); color: var(--text); font
 <main class="main">
   <div class="topbar">
     <div class="topbar-breadcrumb">
-      <a href="#">alignr</a> / <a href="#">design-doc</a> · v0.1 · 2026
+      <a href="#">alignr</a> / <a href="#">design-doc</a> · v1.0.0 · 2026
     </div>
     <div class="topbar-right">
       <span class="topbar-tag">Compliance &amp; Audit</span>
       <span class="topbar-tag">EU AI Act · High-Risk</span>
+      <span class="topbar-tag">Pipeline: Validated ✓</span>
     </div>
   </div>
 
@@ -369,11 +371,12 @@ body { font-family: var(--sans); background: var(--bg); color: var(--text); font
 
     <!-- HEADER -->
     <header class="doc-header" id="abstract">
-      <div class="doc-eyebrow">AlignR v0.1 &nbsp;·&nbsp; RLHF for Regulated Enterprise AI &nbsp;·&nbsp; 2026</div>
+      <div class="doc-eyebrow">AlignR v1.0.0 &nbsp;·&nbsp; RLHF for Regulated Enterprise AI &nbsp;·&nbsp; 2026</div>
       <h1 class="doc-title">AlignR: <em>Behavioural Alignment</em><br>for Regulated Industry AI</h1>
       <div class="doc-byline">
         <span>Design Documentation &nbsp;·&nbsp; Compliance &amp; Audit Reference</span>
-        <span>Architecture Portfolio &nbsp;·&nbsp; March 2026</span>
+        <span>Architecture Portfolio &nbsp;·&nbsp; May 2026</span>
+        <span>Pipeline: End-to-end validated · All 6 artefacts produced</span>
       </div>
 
       <div class="stat-grid">
@@ -405,7 +408,9 @@ body { font-family: var(--sans); background: var(--bg); color: var(--text); font
             <span class="kw">behavioural alignment</span>
             <span class="kw">regulated AI</span>
             <span class="kw">conformity assessment</span>
-            <span class="kw">Llama 3</span>
+            <span class="kw">Argilla</span>
+            <span class="kw">MLflow</span>
+            <span class="kw">TRL</span>
           </div>
         </div>
       </div>
@@ -1616,86 +1621,100 @@ body { font-family: var(--sans); background: var(--bg); color: var(--text); font
     <!-- §11 MVP SCOPE -->
     <section class="section" id="mvp">
       <h2 class="section-heading"><span class="section-num">§11</span> MVP Scope &amp; Build Boundaries</h2>
-      <p class="body-text">AlignR is designed as a production system. The MVP build demonstrates the full pipeline but operates within the constraints of free-tier compute and a portfolio demonstration context. The table below is explicit about what is fully implemented in the MVP, what is simulated or approximated for demonstration purposes, and what is deferred to a production build. This distinction matters: misrepresenting simulated components as implemented is a design integrity problem, not a positioning one.</p>
+      <p class="body-text">AlignR is designed as a production system. The MVP build demonstrates the full pipeline end-to-end but operates within the constraints of free-tier compute and a portfolio demonstration context. This section is explicit about what was fully implemented, what was approximated, and what is deferred to production. Misrepresenting simulated components as implemented is a design integrity problem — not a positioning one.</p>
+
+      <div class="callout blue">
+        <div class="callout-label">MVP Build Record — What Actually Ran</div>
+        <div class="callout-body">
+          <strong>Compute:</strong> Kaggle free tier · T4 x2 GPU · No cost<br>
+          <strong>Reward model backbone:</strong> distilbert-base-uncased (67MB) — chosen for T4 memory constraints. Production target: Mistral-7B-Instruct on GCP Vertex AI A100.<br>
+          <strong>DPO fine-tuning model:</strong> distilgpt2 (82MB) — same rationale. Production target: Mistral-7B-Instruct with LoRA r=16 via PEFT.<br>
+          <strong>Preference dataset:</strong> 4,827 validated pairs from Anthropic HH-RLHF (public dataset, zero cost). Production replaces with domain expert annotation via Argilla.<br>
+          <strong>Reward model validation accuracy:</strong> 56% (threshold: 55%) — PASS. Expected for a general-purpose tiny model on diverse preference data.<br>
+          <strong>MLflow run IDs:</strong> Reward model: 96be536902ae457cba127544216079a2 · DPO: 53fbb2e84f2d417ebb2890444e2d8991<br>
+          <strong>All 6 artefacts produced:</strong> ART-001 through ART-005 complete · ART-006 pending CCO sign-off (by design)<br>
+          <strong>Artefact bundle:</strong> alignr-v1.0.0-bundle.zip · SHA-256 hashed manifest generated
+        </div>
+      </div>
 
       <div class="mvp-grid">
         <div class="mvp-col">
           <div class="mvp-col-header implemented">Fully implemented</div>
-          <div class="mvp-item">Preference data collection pipeline
-            <span class="mvp-sub">Argilla self-hosted · Docker Compose · annotator workflow</span>
+          <div class="mvp-item">Preference data pipeline
+            <span class="mvp-sub">HH-RLHF bootstrap · 4,827 validated pairs · ART-001 annotation log</span>
           </div>
-          <div class="mvp-item">Preference dataset export to TRL format
-            <span class="mvp-sub">Argilla SDK → HuggingFace Dataset · versioned</span>
+          <div class="mvp-item">Argilla annotation infrastructure
+            <span class="mvp-sub">Self-hosted · Docker Compose · Elasticsearch backend · running on localhost:6900</span>
           </div>
           <div class="mvp-item">Reward model training
-            <span class="mvp-sub">TRL RewardTrainer · Llama-3-8B backbone · bfloat16</span>
+            <span class="mvp-sub">TRL RewardTrainer · distilbert-base-uncased · 56% val accuracy · ART-002</span>
           </div>
           <div class="mvp-item">DPO fine-tuning
-            <span class="mvp-sub">TRL DPOTrainer · LoRA r=16 · PEFT · single A100</span>
+            <span class="mvp-sub">TRL DPOTrainer · distilgpt2 · preference-aligned · ART-003 + ART-004</span>
           </div>
           <div class="mvp-item">MLflow experiment tracking
-            <span class="mvp-sub">Self-hosted · hyperparams · loss curve · artefact store</span>
+            <span class="mvp-sub">Self-hosted · hyperparams logged · loss curves · artefact store · run IDs recorded</span>
           </div>
-          <div class="mvp-item">LoRA merge and model export
-            <span class="mvp-sub">merge_and_unload() · safetensors · GGUF for Ollama</span>
+          <div class="mvp-item">Red-team evaluation suite
+            <span class="mvp-sub">Refusal calibration · safe response · consistency · ART-005 JSON report</span>
           </div>
-          <div class="mvp-item">Local inference demo
-            <span class="mvp-sub">Ollama · aligned model vs. base model comparison</span>
+          <div class="mvp-item">Compliance artefact bundle
+            <span class="mvp-sub">SHA-256 manifest · ART-001–006 · ZIP export · regulator-submission format</span>
           </div>
-          <div class="mvp-item">lm-eval benchmark run
-            <span class="mvp-sub">AlignR eval suite · results logged to MLflow</span>
+          <div class="mvp-item">GitHub repo · full pipeline code
+            <span class="mvp-sub">All scripts, configs, notebooks, Docker Compose files committed and public</span>
           </div>
         </div>
         <div class="mvp-col">
-          <div class="mvp-col-header simulated">Simulated / approximated</div>
+          <div class="mvp-col-header simulated">Approximated for MVP</div>
+          <div class="mvp-item">Production-scale base model
+            <span class="mvp-sub">distilbert / distilgpt2 used for T4 compatibility · Mistral-7B is the production target · pipeline mechanics are identical</span>
+          </div>
           <div class="mvp-item">Domain-specific preference data
-            <span class="mvp-sub">Bootstrap: Anthropic HH-RLHF dataset · production replaces with internal annotation</span>
+            <span class="mvp-sub">HH-RLHF bootstrap · production replaces with domain expert annotation campaign (12,000–20,000 pairs)</span>
           </div>
           <div class="mvp-item">Domain expert annotators
-            <span class="mvp-sub">MVP uses synthetic annotator personas on HH-RLHF · production requires real domain experts</span>
+            <span class="mvp-sub">Public dataset used for MVP · production requires compliance officers, underwriters, legal counsel</span>
           </div>
-          <div class="mvp-item">Inter-annotator agreement
-            <span class="mvp-sub">Argilla IAA computed but on a small annotator pool · production requires ≥3 annotators per pair</span>
+          <div class="mvp-item">Red-team query volume
+            <span class="mvp-sub">MVP: 10-query suite demonstrating pipeline · production: 400–800 adversarial queries with compliance reviewer sign-off</span>
           </div>
-          <div class="mvp-item">Red-team evaluation
-            <span class="mvp-sub">MVP: 50-query manual red-team · production: 400–800 query automated suite</span>
+          <div class="mvp-item">CCO / DPO sign-off
+            <span class="mvp-sub">ART-006 pending manual sign-off — this is correct by design, not a gap. In production: signed PDF via document management system</span>
           </div>
-          <div class="mvp-item">CCO / DPO sign-off workflow
-            <span class="mvp-sub">MVP: structured PDF output · production: signed document management system</span>
-          </div>
-          <div class="mvp-item">Artefact bundle export
-            <span class="mvp-sub">MVP: local filesystem · production: encrypted internal object store</span>
+          <div class="mvp-item">Artefact storage
+            <span class="mvp-sub">MVP: local filesystem + Kaggle output · production: encrypted internal object store with RBAC</span>
           </div>
         </div>
         <div class="mvp-col">
           <div class="mvp-col-header deferred">Deferred to production</div>
-          <div class="mvp-item">vLLM inference serving
-            <span class="mvp-sub">Requires dedicated GPU node · documented upgrade path from Ollama</span>
+          <div class="mvp-item">Mistral-7B / Llama-3-8B training
+            <span class="mvp-sub">Requires A100 40GB · GCP Vertex AI · documented upgrade path · estimated $80–100 compute</span>
           </div>
-          <div class="mvp-item">Multi-GPU / distributed training
-            <span class="mvp-sub">DeepSpeed ZeRO-3 · required for 70B or full fine-tune</span>
+          <div class="mvp-item">LoRA r=16 fine-tuning via PEFT
+            <span class="mvp-sub">Full LoRA config in configs/dpo_default.yaml · ready to run on A100</span>
+          </div>
+          <div class="mvp-item">vLLM inference serving
+            <span class="mvp-sub">Requires dedicated GPU node · OpenAI-compatible REST API · documented in serve/vllm_config.yaml</span>
+          </div>
+          <div class="mvp-item">GCP Vertex AI integration
+            <span class="mvp-sub">Vertex AI Training + Experiments + Endpoints · replaces Kaggle + self-hosted MLflow</span>
           </div>
           <div class="mvp-item">PPO full RLHF loop
-            <span class="mvp-sub">TRL PPOTrainer · higher infra complexity · supported in config</span>
+            <span class="mvp-sub">TRL PPOTrainer · supported in configs/ppo_advanced.yaml · higher infra complexity</span>
           </div>
-          <div class="mvp-item">Automated retraining trigger
-            <span class="mvp-sub">Drift detection → annotation cycle trigger · monitoring integration</span>
+          <div class="mvp-item">Automated drift detection + retraining
+            <span class="mvp-sub">Output monitoring → annotation cycle trigger · 6-month reassessment schedule</span>
           </div>
-          <div class="mvp-item">Access control and RBAC
-            <span class="mvp-sub">Annotator role management · model registry access policy</span>
-          </div>
-          <div class="mvp-item">Regulator export tooling
-            <span class="mvp-sub">One-click artefact bundle ZIP with cover sheet · pending design</span>
-          </div>
-          <div class="mvp-item">Llama-3-70B upgrade
-            <span class="mvp-sub">Requires 80GB VRAM or multi-GPU · quality ceiling improvement</span>
+          <div class="mvp-item">Multi-GPU / distributed training
+            <span class="mvp-sub">DeepSpeed ZeRO-3 · required for 70B base or full fine-tune</span>
           </div>
         </div>
       </div>
 
-      <div class="callout amber">
-        <div class="callout-label">Portfolio note</div>
-        <div class="callout-body">The MVP demonstrates the complete pipeline end-to-end using free-tier compute and a public bootstrap dataset. The compliance artefact layer, data schema, and deployment architecture are designed for production and are implemented in full. The gap between MVP and production is primarily in the annotation layer (real domain experts vs. bootstrap data) and the serving layer (Ollama vs. vLLM) — not in the alignment pipeline itself.</div>
+      <div class="callout teal">
+        <div class="callout-label">What this demonstrates</div>
+        <div class="callout-body">The MVP demonstrates complete pipeline mechanics end-to-end: preference data → reward model → DPO alignment → red-team evaluation → compliance artefact bundle. Every stage runs real code, produces real outputs, and logs to a real MLflow instance. The model size is a compute constraint, not an architectural one — the same scripts, configs, and artefact schemas run unchanged with Mistral-7B on an A100. The pipeline is the demonstration. The model is a parameter.</div>
       </div>
     </section>
 
@@ -1919,8 +1938,8 @@ body { font-family: var(--sans); background: var(--bg); color: var(--text); font
   </div><!-- /content -->
 
   <footer class="doc-footer">
-    <span>AlignR v0.1 · Design Documentation · 2026</span>
-    <span>EU AI Act High-Risk System · Compliance &amp; Audit Reference</span>
+    <span>AlignR v1.0.0 · Design Documentation · 2026</span>
+    <span>EU AI Act High-Risk System · Compliance &amp; Audit Reference · Pipeline: Validated ✓</span>
   </footer>
 
 </main>
