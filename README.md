@@ -12,7 +12,7 @@ grounding check, and Vale before it reaches a writer as a draft pull request.
 
 The model never writes XML, never invents a value, and never merges.
 
-**[Read the design document](https://raosiddharthp.github.io/AlignR/)**
+**[Read the design document](https://siddharthraop.github.io/AlignR/)**
 
 ## Status
 
@@ -236,7 +236,7 @@ The design document is a single HTML page with no build step.
 1.  Clone the repository:
 
     ```sh
-    git clone https://github.com/raosiddharthp/AlignR.git
+    git clone https://github.com/siddharthraop/AlignR.git
     cd AlignR
     ```
 
@@ -285,12 +285,12 @@ the readers are fictional.
 This project is the fourth in a series of design documents. Each one solves one
 economic problem in documentation, and each builds on the same sample content.
 
-1.  [MANIFEST](https://raosiddharthp.github.io/Manifest/): migrate DITA XML to
+1.  [MANIFEST](https://siddharthraop.github.io/Manifest/): migrate DITA XML to
     docs as code and prove that no content was lost.
-1.  [The Autonomous Author](https://raosiddharthp.github.io/The-Autonomous-Author/):
+1.  [The Autonomous Author](https://siddharthraop.github.io/The-Autonomous-Author/):
     run the docs loop at the pace of the code loop, with a first draft on every
     merge.
-1.  [KnowledgeFlow](https://raosiddharthp.github.io/KnowledgeFlow/): answer
+1.  [KnowledgeFlow](https://siddharthraop.github.io/KnowledgeFlow/): answer
     questions across documentation silos, from the links writers already
     maintain.
 1.  **AlignR**: generate new DITA topics from the ones you have, and check them
@@ -304,7 +304,7 @@ pair format and replaces training with schema-constrained generation.
 ## Contact
 
 Siddharth Rao. To ask a question or suggest a change,
-[open an issue](https://github.com/raosiddharthp/AlignR/issues).
+[open an issue](https://github.com/siddharthraop/AlignR/issues).
 
 ## License
 
