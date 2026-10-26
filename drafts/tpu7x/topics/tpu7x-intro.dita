@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="tpu7x-intro" xml:lang="en-US">
+  <title><keyword keyref="product-tpu7x"/></title>
+  <shortdesc><keyword keyref="product-tpu7x"/> is for the largest training and inference workloads. Each chip has <keyword keyref="tpu7x-tensorcores"/> TensorCores and <keyword keyref="tpu7x-sparsecores"/> SparseCores, and a pod holds <keyword keyref="tpu7x-chips-per-pod"/> chips.</shortdesc>
+  <prolog>
+    <author type="contributor">AlignR draft, for review by a technical writer</author>
+    <critdates>
+      <created date="2026-10-26"/>
+    </critdates>
+    <metadata>
+      <audience type="ml-engineer"/>
+      <othermeta name="generated-by" content="alignr 0.1.0 · run 20261026-041740-4593 · schema 2117 · model gemini-3.8-flash"/>
+    </metadata>
+    <data name="source" value="tpu7x" href="https://docs.cloud.google.com/tpu/docs/tpu7x" format="html" scope="external"/>
+    <data name="licence" value="CC BY 4.0. Drafted from Google Cloud TPU documentation (adapted and modified) and launch facts."/>
+    <data name="siblings" value="tpu-v6e-intro.dita tpu-v5p-intro.dita"/>
+  </prolog>
+  <conbody>
+    <p>See the memory hierarchy topic for the memory layout of each chip.</p>
+    <note conref="../reuse/tpu-warehouse.dita#tpu-warehouse/note-tpu-api-tpu7x"/>
+    <note conref="../reuse/tpu-warehouse.dita#tpu-warehouse/note-tensorflow-tpu7x"/>
+    <draft-comment author="alignr" disposition="open" otherprops="for(engineer) about(gap)">For the engineer: What is the pod topology for TPU7x?</draft-comment>
+  </conbody>
+</concept>
