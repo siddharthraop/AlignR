@@ -54,8 +54,9 @@ def build_schema(plan: Plan, facts: Facts, corpus: Corpus) -> tuple[dict, str]:
         return schema, schema_hash(schema)
     body = {}
     for s in plan.sections:
+        notes = allowed_notes(plan, s["id"], facts, corpus)
         sec = {"title": _str(),
-               "notes": _arr({"type": "string", "enum": list(corpus.notes)}, 0, 3),
+               "notes": _arr({"type": "string", "enum": notes}, 0, 3) if notes else _arr(_str(), 0, 0),
                "paras": _arr(_obj({"text": _str(), "sources": _arr({"type": "string", "enum": sources}, 1, 3)}), 0, 4)}
         if s["table"] == "spec":
             spec_keys = [v.key for v in facts.spec_values()]
@@ -71,6 +72,15 @@ def build_schema(plan: Plan, facts: Facts, corpus: Corpus) -> tuple[dict, str]:
         body[s["id"]] = _obj(sec)
     schema = _obj({"title": _str(), "shortdesc": _str(), "body": _obj(body), "questions": questions_schema(plan)})
     return schema, schema_hash(schema)
+
+
+def allowed_notes(plan: Plan, sid: str, facts: Facts, corpus: Corpus) -> list[str]:
+    """A section may reuse the notes its siblings reuse there. Notes about the new generation itself (they name its
+    product key) belong in the family's first topic, the introduction, so they aren't repeated on every page."""
+    used = [n for ex in plan.examples for n in ex["body"].get(sid, {}).get("notes", [])]
+    first = plan.slot == (plan.family_head or plan.slot)
+    about_gen = [n.id for n in corpus.notes.values() if f'keyref="{facts.product_key}"' in n.xml] if first else []
+    return list(dict.fromkeys(used + about_gen))
 
 
 def schema_hash(schema: dict) -> str:

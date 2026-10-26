@@ -185,3 +185,13 @@ def test_edit_ratio():
     assert edit_ratio("a b c d", "a b c d") == 0
     assert edit_ratio("a b c d", "a b x d") == 0.25
     assert edit_ratio("", "a b") == 1
+
+
+def test_generation_notes_belong_in_the_introduction(env):
+    c, f = env
+    def notes(slot, sid):
+        s, _ = build_schema(plan_topic(c, f, slot), f, c)
+        return s["properties"]["body"]["properties"][sid]["properties"]["notes"]["items"].get("enum", [])
+    assert set(notes("intro", "body")) == {"note-tpu-api-tpu7x", "note-tensorflow-tpu7x"}
+    assert notes("specifications", "system-architecture") == []
+    assert notes("configurations", "slice-shapes") == ["note-slice-shape"]

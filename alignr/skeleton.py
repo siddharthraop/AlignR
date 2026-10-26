@@ -95,6 +95,7 @@ class Plan:
     stub: bool = False
     about: str = ""
     facts: list[str] = field(default_factory=list)     # statement IDs for a stub
+    family_head: str = ""                              # the slot that heads the family in the map (the introduction)
 
     @property
     def has_sibling(self) -> bool:
@@ -128,7 +129,8 @@ def plan_topic(corpus: Corpus, facts: Facts, slot: str) -> Plan:
         sections.append({"id": sid, "wrapped": sid != "body", "table": oc,
                          "fixed_columns": list(next(iter(heads))) if oc == "spec" and len(heads) == 1 else None,
                          "sibling_columns": [t["columns"] for t in tables]})
-    p = Plan(slot, tid, types.pop(), sibs, examples, sections)
+    head = next(iter(corpus.families[sibs[0][0]].slots))
+    p = Plan(slot, tid, types.pop(), sibs, examples, sections, family_head=head)
     p.conflicts = sibling_conflicts(examples, facts) + relevant(facts.conflicts, p, facts)
     for i, c in enumerate(p.conflicts, 1):
         c.id = f"C{i}"

@@ -14,7 +14,7 @@ import time
 
 from .corpus import Corpus
 from .facts import Facts
-from .schema import NO_UNIT
+from .schema import NO_UNIT, allowed_notes
 from .skeleton import Plan
 
 # Gemini 3.8 Flash, introductory price to 31 December 2026, per 1M tokens (design doc §5.9, Agent Platform pricing).
@@ -33,7 +33,7 @@ Rules:
 4. Each paragraph cites the source IDs of the facts it uses.
 5. Spec table: one row per spec value, a label in the siblings' style, the key, and the unit from the facts
    ("none" for no unit).
-6. Use a reusable note by its ID only when a fact supports it.
+6. Use a reusable note by its ID only when a fact supports it. The schema lists the notes this section may use.
 7. If the sources conflict, or the facts don't say something the siblings say, add a question instead of guessing:
    for the engineer about values, for the writer about wording or structure. Every listed conflict needs one question
    whose "about" is that conflict's ID. Don't repeat a sibling sentence that the facts don't support.
@@ -64,7 +64,8 @@ def prompt_for(plan: Plan, facts: Facts, corpus: Corpus) -> str:
             "tables": {k: {"columns": t["columns"], "rows": t["rows"], "source": t["source"]} for k, t in facts.tables.items()},
         },
         "allowed_keys": {k: (keyed[k].value if k in keyed else corpus.keys.get(k, "")) for k in facts.allowed_keys()},
-        "reusable_notes": {n.id: n.text for n in corpus.notes.values()},
+        "reusable_notes": {n.id: n.text for n in corpus.notes.values()
+                           if plan.stub or any(n.id in allowed_notes(plan, s["id"], facts, corpus) for s in plan.sections)},
         "conflicts": [{"id": c.id, "ask": c.ask, "detail": c.detail} for c in plan.conflicts],
     }
     if plan.stub:
