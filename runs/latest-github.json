@@ -1,26 +1,26 @@
 {
  "alignr": "0.1.0",
- "run": "20261026-040744-2311",
+ "run": "20261026-040333-b7dd",
  "source": "github",
  "generation": "tpu7x",
  "model": "gemini-3.8-flash",
  "model_kind": "gemini",
- "started": "2026-10-26T04:07:44+00:00",
- "seconds": 5.2,
+ "started": "2026-10-26T04:03:33+00:00",
+ "seconds": 267.9,
  "facts_page": "https://docs.cloud.google.com/tpu/docs/tpu7x",
  "metrics": {
   "grammar_failures_reaching_writer": 0,
   "withheld": 0,
-  "values_total": 79,
-  "values_sourced": 79,
+  "values_total": 82,
+  "values_sourced": 82,
   "values_sourced_pct": 100.0,
-  "edit_ratio_mean": 0.3063,
-  "edit_ratio_max": 0.4931,
+  "edit_ratio_mean": 0.2334,
+  "edit_ratio_max": 0.339,
   "edit_ratio_target": 0.4,
-  "edit_ratio_met": false,
+  "edit_ratio_met": true,
   "topics": 5,
   "topics_with_sibling": 4,
-  "open_questions": 7,
+  "open_questions": 9,
   "model_calls": 5,
   "calls_per_topic": 1.0,
   "cost_logged": true
@@ -28,8 +28,8 @@
  "usage": {
   "calls": 5,
   "tokens_in": 21075,
-  "tokens_out": 1617,
-  "cost_usd": 0.02186
+  "tokens_out": 62000,
+  "cost_usd": 0.24831
  },
  "topics": [
   {
@@ -59,7 +59,9 @@
        {
         "text": "Use the specification topic to size a slice, the configurations topic to choose a slice shape, and the VM types topic to see what each VM provides.",
         "sources": [
-         "S1"
+         "S1",
+         "S3",
+         "S4"
         ]
        }
       ]
@@ -69,7 +71,7 @@
      {
       "for": "engineer",
       "about": "gap",
-      "text": "What is the pod interconnect topology for TPU7x?"
+      "text": "What is the pod topology for {product-tpu7x}?"
      }
     ]
    },
@@ -102,18 +104,18 @@
     }
    ],
    "questions": [
-    "For the engineer: What is the pod interconnect topology for TPU7x?"
+    "For the engineer: What is the pod topology for {product-tpu7x}?"
    ],
    "conflicts": [],
    "usage": {
     "calls": 1,
     "tokens_in": 3824,
-    "tokens_out": 260,
-    "cost_usd": 0.00384,
-    "model_ms": 3163,
+    "tokens_out": 7060,
+    "cost_usd": 0.02934,
+    "model_ms": 47388,
     "price": "$0.75/$3.75 per 1M tokens in/out"
    },
-   "ms": 3167,
+   "ms": 47398,
    "stages": [
     {
      "topic": "tpu7x-intro",
@@ -179,18 +181,8 @@
     "body": {
      "system-architecture": {
       "title": "System architecture",
-      "notes": [
-       "note-tpu-api-tpu7x",
-       "note-tensorflow-tpu7x"
-      ],
-      "paras": [
-       {
-        "text": "See the memory hierarchy topic for the memory layout of each chip.",
-        "sources": [
-         "S1"
-        ]
-       }
-      ],
+      "notes": [],
+      "paras": [],
       "table": {
        "rows": [
         {
@@ -246,12 +238,17 @@
      {
       "for": "writer",
       "about": "C1",
-      "text": "The sibling topics give hbm-capacity in different units (v6e GB, v5p GiB). The tpu7x facts use GiB (S1). Confirm the unit, and correct the sibling that is wrong."
+      "text": "The sibling topics give HBM capacity in different units (v6e uses GB, while v5p uses GiB). TPU7x facts specify GiB. Which unit should be standardized across TPU specification topics?"
      },
      {
       "for": "engineer",
       "about": "C2",
-      "text": "S1 gives hbm-bandwidth as 7380 GBps; S2 gives 7.37 TB/s (approximately). 7380 GBps is 7.38 TB/s, so the two sources disagree."
+      "text": "S1 lists HBM bandwidth as 7380 GBps, but S2 lists it as approximately 7.37 TB/s (7380 GBps converts to 7.38 TB/s). Which value is correct?"
+     },
+     {
+      "for": "engineer",
+      "about": "gap",
+      "text": "What is the maximum multislice scale in chips for {product-tpu7x}?"
      }
     ]
    },
@@ -284,8 +281,9 @@
     }
    ],
    "questions": [
-    "For the writer: The sibling topics give hbm-capacity in different units (v6e GB, v5p GiB). The tpu7x facts use GiB (S1). Confirm the unit, and correct the sibling that is wrong.",
-    "For the engineer: S1 gives hbm-bandwidth as 7380 GBps; S2 gives 7.37 TB/s (approximately). 7380 GBps is 7.38 TB/s, so the two sources disagree."
+    "For the writer: The sibling topics give HBM capacity in different units (v6e uses GB, while v5p uses GiB). TPU7x facts specify GiB. Which unit should be standardized across TPU specification topics?",
+    "For the engineer: S1 lists HBM bandwidth as 7380 GBps, but S2 lists it as approximately 7.37 TB/s (7380 GBps converts to 7.38 TB/s). Which value is correct?",
+    "For the engineer: What is the maximum multislice scale in chips for {product-tpu7x}?"
    ],
    "conflicts": [
     {
@@ -310,12 +308,12 @@
    "usage": {
     "calls": 1,
     "tokens_in": 4912,
-    "tokens_out": 736,
-    "cost_usd": 0.00644,
-    "model_ms": 5149,
+    "tokens_out": 8614,
+    "cost_usd": 0.03599,
+    "model_ms": 53625,
     "price": "$0.75/$3.75 per 1M tokens in/out"
    },
-   "ms": 5168,
+   "ms": 53657,
    "stages": [
     {
      "topic": "tpu7x-specifications",
@@ -357,11 +355,11 @@
     {
      "topic": "tpu7x-specifications",
      "stage": "open_pr",
-     "questions": 2
+     "questions": 3
     }
    ],
    "compare": {
-    "edit_ratio": 0.4931
+    "edit_ratio": 0.2299
    },
    "published_href": "topics/tpu7x-specifications.dita"
   },
@@ -390,10 +388,16 @@
       ],
       "paras": [
        {
-        "text": "Every slice shape uses the {tpu7x-machine-type} machine type with {tpu7x-chips-per-vm} chips.",
+        "text": "Every {product-tpu7x} VM uses the {tpu7x-machine-type} machine type with {tpu7x-chips-per-vm} chips.",
         "sources": [
          "S3",
          "S4"
+        ]
+       },
+       {
+        "text": "Slice shapes take the form `AxBxC`; each dimension is a multiple of 4, up to {tpu7x-chips-per-pod} chips.",
+        "sources": [
+         "S3"
         ]
        },
        {
@@ -430,8 +434,8 @@
     "rules": "dita-corpus house rules (corpus.sch) + AlignR rules ALR-1 to ALR-4"
    },
    "grounding": {
-    "total": 63,
-    "grounded": 63,
+    "total": 66,
+    "grounded": 66,
     "failures": []
    },
    "remaining_failures": [],
@@ -450,12 +454,12 @@
    "usage": {
     "calls": 1,
     "tokens_in": 4801,
-    "tokens_out": 296,
-    "cost_usd": 0.00471,
-    "model_ms": 2974,
+    "tokens_out": 36358,
+    "cost_usd": 0.13994,
+    "model_ms": 267825,
     "price": "$0.75/$3.75 per 1M tokens in/out"
    },
-   "ms": 2984,
+   "ms": 267847,
    "stages": [
     {
      "topic": "tpu7x-configurations",
@@ -498,7 +502,7 @@
     }
    ],
    "compare": {
-    "edit_ratio": 0.36
+    "edit_ratio": 0.3318
    },
    "published_href": "topics/tpu7x-configurations.dita"
   },
@@ -568,12 +572,12 @@
    "usage": {
     "calls": 1,
     "tokens_in": 3933,
-    "tokens_out": 139,
-    "cost_usd": 0.00347,
-    "model_ms": 2437,
+    "tokens_out": 7903,
+    "cost_usd": 0.03259,
+    "model_ms": 60653,
     "price": "$0.75/$3.75 per 1M tokens in/out"
    },
-   "ms": 2460,
+   "ms": 60659,
    "stages": [
     {
      "topic": "tpu7x-vm-types",
@@ -632,7 +636,7 @@
    "model_error": null,
    "answer": {
     "title": "{product-tpu7x} memory architecture",
-    "shortdesc": "Learn about the memory hierarchy and dual-chiplet organization on {product-tpu7x}.",
+    "shortdesc": "Learn about the memory hierarchy of {product-tpu7x}, including the dual-chiplet HBM layout and host memory offloading.",
     "outline": [
      {
       "title": "Dual-chiplet design and HBM",
@@ -641,7 +645,7 @@
       ]
      },
      {
-      "title": "Host memory offloading",
+      "title": "Host memory and offloading",
       "facts": [
        "F9"
       ]
@@ -651,7 +655,12 @@
      {
       "for": "engineer",
       "about": "C1",
-      "text": "S1 lists HBM bandwidth as 7380 GBps, but S2 lists it as approximately 7.37 TB/s. Which specification value is correct?"
+      "text": "S1 lists HBM bandwidth as {tpu7x-hbm-bandwidth} GBps, while S2 lists approximately 7.37 TB/s. Which value is accurate for {product-tpu7x}?"
+     },
+     {
+      "for": "writer",
+      "about": "gap",
+      "text": "Because no sibling topics exist for earlier generations, what standard structure and headings should be adopted for memory concept topics?"
      }
     ]
    },
@@ -685,7 +694,8 @@
    ],
    "questions": [
     "For the writer: This topic is new in tpu7x and has no sibling to draft from. AlignR wrote an outline with the facts each section should cover. Write the prose, then close this comment.",
-    "For the engineer: S1 lists HBM bandwidth as 7380 GBps, but S2 lists it as approximately 7.37 TB/s. Which specification value is correct?",
+    "For the engineer: S1 lists HBM bandwidth as {tpu7x-hbm-bandwidth} GBps, while S2 lists approximately 7.37 TB/s. Which value is accurate for {product-tpu7x}?",
+    "For the writer: Because no sibling topics exist for earlier generations, what standard structure and headings should be adopted for memory concept topics?",
     "For the writer: write this section from F8 (S2): Each chip has two chiplets. Each chiplet has one TensorCore, two SparseCores and GiB of HBM.",
     "For the writer: write this section from F9 (S2): Host memory connects to the chip with much lower bandwidth than HBM; it can hold offloaded activations or optimizer states."
    ],
@@ -703,12 +713,12 @@
    "usage": {
     "calls": 1,
     "tokens_in": 3605,
-    "tokens_out": 186,
-    "cost_usd": 0.0034,
-    "model_ms": 2680,
+    "tokens_out": 2065,
+    "cost_usd": 0.01045,
+    "model_ms": 16920,
     "price": "$0.75/$3.75 per 1M tokens in/out"
    },
-   "ms": 2697,
+   "ms": 16937,
    "stages": [
     {
      "topic": "tpu7x-memory",
@@ -746,11 +756,11 @@
     {
      "topic": "tpu7x-memory",
      "stage": "open_pr",
-     "questions": 4
+     "questions": 5
     }
    ],
    "compare": {
-    "edit_ratio": 0.8714
+    "edit_ratio": 0.8571
    },
    "published_href": "topics/tpu7x-memory.dita"
   }
@@ -760,7 +770,7 @@
  "issue_created": null,
  "prs": [],
  "issue_to_prs_seconds": null,
- "workflow_run": "https://github.com/siddharthraop/AlignR/actions/runs/40267405751",
+ "workflow_run": "https://github.com/siddharthraop/AlignR/actions/runs/40267067205",
  "dita_ot": "failure",
- "finished": "2026-10-26T04:07:58+00:00"
+ "finished": "2026-10-26T04:08:05+00:00"
 }
