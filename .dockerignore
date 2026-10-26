@@ -1,0 +1,12 @@
+.git
+corpus/.git
+corpus/media
+corpus/tpu/media
+corpus/gemma
+corpus/nat
+corpus/api
+**/__pycache__
+.pytest_cache
+out
+build
+_site
