@@ -79,3 +79,6 @@ td.v{font-family:var(--f-type)}td.st{min-width:90px}
 .foot{max-width:1180px;margin:0 auto;padding:0 16px 30px}
 .ratio{font-family:var(--f-type);font-weight:600;color:var(--ink)}
 @media (max-width:640px){.prog{grid-template-columns:minmax(0,1fr)}}
+ol.progress li{border:1px solid var(--rule);padding:3px 8px;border-radius:var(--radius);color:var(--ink-soft);font-size:12px}
+ol.progress li.done{color:var(--paper);background:var(--ink);border-color:var(--ink)}
+ol.progress li.now{color:var(--paper);background:var(--stamp);border-color:var(--stamp)}

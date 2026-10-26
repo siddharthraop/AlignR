@@ -230,7 +230,7 @@
   $("#go").addEventListener("click", draft);
   scorecard().then(async () => {
     const latest = await fetch(API + "/api/runs/latest").then((r) => (r.ok ? r.json() : null)).catch(() => null);
-    if (latest) {
+    if (latest && !run && !$("#go").disabled) {
       $("#status").innerHTML = `<div class="notice">Showing the latest run, from ${esc(latest.started.replace("T", " ").slice(0, 16))} UTC. Select Draft to run it again.</div>`;
       show(latest);
     }
