@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE reference PUBLIC "-//OASIS//DTD DITA Reference//EN" "reference.dtd">
+<reference id="tpu7x-configurations" xml:lang="en-US">
+  <title><keyword keyref="product-tpu7x"/> supported configurations</title>
+  <shortdesc>The slice shapes you can request for <keyword keyref="product-tpu7x"/>, and how many chips and hosts each uses.</shortdesc>
+  <prolog>
+    <author type="contributor">AlignR draft, for review by a technical writer</author>
+    <critdates>
+      <created date="2026-10-26"/>
+    </critdates>
+    <metadata>
+      <audience type="ml-engineer"/>
+      <othermeta name="generated-by" content="alignr 0.1.0 · run 20261026-041740-4593 · schema bbd0 · model gemini-3.8-flash"/>
+    </metadata>
+    <data name="source" value="tpu7x" href="https://docs.cloud.google.com/tpu/docs/tpu7x" format="html" scope="external"/>
+    <data name="licence" value="CC BY 4.0. Drafted from Google Cloud TPU documentation (adapted and modified) and launch facts."/>
+    <data name="siblings" value="tpu-v6e-configurations.dita tpu-v5p-configurations.dita"/>
+  </prolog>
+  <refbody>
+    <section id="slice-shapes">
+      <title>Slice shapes</title>
+      <note conref="../reuse/tpu-warehouse.dita#tpu-warehouse/note-slice-shape"/>
+      <table outputclass="slice-shapes">
+        <tgroup cols="6">
+          <colspec colname="c1"/>
+          <colspec colname="c2"/>
+          <colspec colname="c3"/>
+          <colspec colname="c4"/>
+          <colspec colname="c5"/>
+          <colspec colname="c6"/>
+          <thead>
+            <row>
+              <entry>slice shape</entry>
+              <entry>number of chips</entry>
+              <entry>number of hosts</entry>
+              <entry>number of VMs</entry>
+              <entry>number of cubes</entry>
+              <entry>scope</entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>2x2x1</entry>
+              <entry>4</entry>
+              <entry>1</entry>
+              <entry>1</entry>
+              <entry>1/16</entry>
+              <entry>Single-host</entry>
+            </row>
+            <row>
+              <entry>2x2x2</entry>
+              <entry>8</entry>
+              <entry>2</entry>
+              <entry>2</entry>
+              <entry>1/8</entry>
+              <entry>Multi-host</entry>
+            </row>
+            <row>
+              <entry>2x2x4</entry>
+              <entry>16</entry>
+              <entry>4</entry>
+              <entry>4</entry>
+              <entry>1/4</entry>
+              <entry>Multi-host</entry>
+            </row>
+            <row>
+              <entry>2x4x4</entry>
+              <entry>32</entry>
+              <entry>8</entry>
+              <entry>8</entry>
+              <entry>1/2</entry>
+              <entry>Multi-host</entry>
+            </row>
+            <row>
+              <entry>4x4x4</entry>
+              <entry>64</entry>
+              <entry>16</entry>
+              <entry>16</entry>
+              <entry>1</entry>
+              <entry>Multi-host</entry>
+            </row>
+            <row>
+              <entry>4x4x8</entry>
+              <entry>128</entry>
+              <entry>32</entry>
+              <entry>32</entry>
+              <entry>2</entry>
+              <entry>Multi-host</entry>
+            </row>
+            <row>
+              <entry>4x8x8</entry>
+              <entry>256</entry>
+              <entry>64</entry>
+              <entry>64</entry>
+              <entry>4</entry>
+              <entry>Multi-host</entry>
+            </row>
+            <row>
+              <entry>8x8x8</entry>
+              <entry>512</entry>
+              <entry>128</entry>
+              <entry>128</entry>
+              <entry>8</entry>
+              <entry>Multi-host</entry>
+            </row>
+            <row>
+              <entry>8x8x16</entry>
+              <entry>1024</entry>
+              <entry>256</entry>
+              <entry>256</entry>
+              <entry>16</entry>
+              <entry>Multi-host</entry>
+            </row>
+            <row>
+              <entry>8x16x16</entry>
+              <entry>2048</entry>
+              <entry>512</entry>
+              <entry>512</entry>
+              <entry>32</entry>
+              <entry>Multi-host</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      <p>Slice shapes take the form <codeph>AxBxC</codeph>; each dimension is a multiple of 4, up to <keyword keyref="tpu7x-chips-per-pod"/> chips.</p>
+      <p>Every slice shape uses the <keyword keyref="tpu7x-machine-type"/> machine type with <keyword keyref="tpu7x-chips-per-vm"/> chips.</p>
+      <p>Slices larger than <keyword keyref="tpu7x-max-api-slice"/> chips need a request to the account team.</p>
+    </section>
+  </refbody>
+</reference>
