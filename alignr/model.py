@@ -107,20 +107,25 @@ class GeminiModel:
         from google import genai
         from google.genai import types
         self.id = model_id or os.environ.get("ALIGNR_MODEL", "gemini-3.8-flash")
-        self.client = genai.Client(api_key=os.environ.get("GOOGLE_API_KEY") or os.environ.get("GEMINI_API_KEY"))
+        self.client = genai.Client(api_key=os.environ.get("GOOGLE_API_KEY") or os.environ.get("GEMINI_API_KEY"),
+                                   http_options=types.HttpOptions(timeout=int(os.environ.get("ALIGNR_TIMEOUT_MS", "90000"))))
         self.types = types
+        self.thinking = os.environ.get("ALIGNR_THINKING", "low")   # structured filling needs little reasoning
 
     def _call(self, system: str, prompt: str, schema: dict, usage: Usage) -> dict:
-        cfg = self.types.GenerateContentConfig(system_instruction=system, temperature=0.2,
-                                               response_mime_type="application/json", response_json_schema=schema)
+        extra = {"thinking_config": self.types.ThinkingConfig(thinking_level=self.thinking)} if self.thinking else {}
         t0 = time.time()
         last = None
         for attempt in range(3):
+            cfg = self.types.GenerateContentConfig(system_instruction=system, temperature=0.2, response_mime_type="application/json",
+                                                   response_json_schema=schema, **extra)
             try:
                 r = self.client.models.generate_content(model=self.id, contents=prompt, config=cfg)
                 break
             except Exception as e:  # rate limits and transient errors: back off, then give up
                 last = e
+                if "thinking" in str(e).lower():
+                    extra = {}            # a model that doesn't take a thinking level
                 time.sleep(2 + 4 * attempt)
         else:
             raise RuntimeError(f"Gemini call failed: {last}")

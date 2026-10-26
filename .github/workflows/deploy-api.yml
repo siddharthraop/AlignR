@@ -43,7 +43,7 @@ jobs:
       - name: Push
         id: push
         run: |
-          IMAGE="$REGION-docker.pkg.dev/${{ vars.GCP_PROJECT }}/${{ vars.GCP_AR_REPO || 'tw-images' }}/alignr-api:${GITHUB_SHA::12}"
+          IMAGE="${{ vars.GCP_AR_REPO }}/alignr-api:${GITHUB_SHA::12}"   # GCP_AR_REPO is the full repository path
           gcloud auth configure-docker "$REGION-docker.pkg.dev" --quiet
           docker tag alignr-api:ci "$IMAGE" && docker push -q "$IMAGE"
           echo "image=$IMAGE" >> "$GITHUB_OUTPUT"

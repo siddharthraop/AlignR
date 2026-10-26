@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import shutil
 import sys
 from pathlib import Path
@@ -15,9 +16,14 @@ from .model import make_model
 
 def cmd_draft(a):
     model = make_model(a.model)
+    gha = bool(os.environ.get("GITHUB_ACTIONS"))
+
     def emit(e):
         if a.verbose:
             print(json.dumps(e), file=sys.stderr)
+        if gha and e.get("stage") in ("generate_topic", "checks", "revise", "withheld"):
+            detail = {k: v for k, v in e.items() if k not in ("topic", "stage")}
+            print(f"::notice title={e.get('topic')} {e['stage']}::{json.dumps(detail)[:900]}", flush=True)
     r = draft_set(a.facts, model, emit=emit, parallel=a.parallel, source=a.source)
     out = write_outputs(r, a.out)
     print(report_markdown(r))

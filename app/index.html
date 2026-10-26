@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AlignR: draft the TPU7x set</title>
+<meta name="description" content="AlignR drafts the held-out TPU7x DITA topics from their v5p and v6e siblings and the launch values, gates every draft, and compares it with the page Google published.">
+<link rel="stylesheet" href="app.css">
+<script src="config.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <a class="brand" href="./">ALIGNR</a>
+  <nav class="main" aria-label="Site">
+    <a href="./" aria-current="page">Draft</a>
+    <a href="../help/">Help</a>
+    <a href="../help/alignr-user-guide.pdf">User guide (PDF)</a>
+    <a href="../dev/">Developer docs</a>
+    <a href="../">Design document</a>
+    <a href="https://github.com/siddharthraop/AlignR">GitHub</a>
+  </nav>
+  <span class="spacer"></span>
+  <button class="icon-btn" id="theme" type="button" aria-label="Switch light or dark theme">◐</button>
+  <button class="btn" id="help-btn" type="button" aria-expanded="false" aria-controls="help">? Help</button>
+</header>
+
+<main id="main">
+  <section aria-labelledby="h-test">
+    <h1 id="h-test">How you know it works <button class="icon-btn" type="button" data-help="scorecard" aria-label="Help: how you know it works">?</button></h1>
+    <p class="lede">AlignR holds out TPU7x. It drafts the TPU7x topics from the v5p and v6e topics and the TPU7x values, and then compares each draft with the page that Google published.</p>
+    <div class="table-wrap">
+      <table id="scorecard">
+        <caption>MVP targets and what the latest runs measured. <span id="sc-from" class="meta"></span></caption>
+        <thead><tr><th scope="col">Metric</th><th scope="col">MVP target</th><th scope="col">Measured</th><th scope="col">Status</th></tr></thead>
+        <tbody>
+          <tr data-m="grammar"><td>Drafts that reach a writer and fail the DITA grammar</td><td>0</td><td class="v">…</td><td class="st"></td></tr>
+          <tr data-m="values"><td>Values with a key or a source</td><td>100%</td><td class="v">…</td><td class="st"></td></tr>
+          <tr data-m="edit"><td>Edit ratio on topics that have a sibling</td><td>Under 40%</td><td class="v">…</td><td class="st"></td></tr>
+          <tr data-m="time"><td>Time from issue to draft pull requests for the set</td><td>Under 15 minutes</td><td class="v">…</td><td class="st"></td></tr>
+          <tr data-m="merge"><td>Open questions at merge</td><td>0</td><td class="v">…</td><td class="st"></td></tr>
+          <tr data-m="cost"><td>Runs with logged cost</td><td>100%</td><td class="v">…</td><td class="st"></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="limits"><strong>Known limits.</strong> AlignR drafts what has a sibling. A concept that's new in a generation, such as the TPU7x dual-chiplet design, gets a stub with questions instead of prose. lxml checks the grammar but doesn't apply the default attribute values that DITA processing needs, so DITA-OT still builds every topic in CI.</p>
+  </section>
+
+  <section aria-labelledby="h-draft">
+    <h2 id="h-draft">Draft a held-out generation <button class="icon-btn" type="button" data-help="draft" aria-label="Help: draft a generation">?</button></h2>
+    <div class="controls">
+      <label>Generation <select id="gen"><option value="tpu7x">TPU7x (Ironwood), held out</option></select></label>
+      <button class="btn btn-fill" id="go" type="button">Draft</button>
+      <span id="quota" class="meta"></span>
+    </div>
+    <p class="meta">Drafts from <code>tpu-v6e-*</code> and <code>tpu-v5p-*</code> sibling topics and <a href="https://github.com/siddharthraop/AlignR/blob/main/facts/tpu7x.yaml">facts/tpu7x.yaml</a>. Each draft calls Gemini, so public drafts are capped per day. A set takes about a minute.</p>
+    <div id="status" role="status" aria-live="polite"></div>
+    <div id="progress"></div>
+  </section>
+
+  <section id="result" class="hidden" aria-labelledby="h-result">
+    <div class="panel-head">
+      <h2 id="h-result">Run <span class="mono" id="run-id"></span> <button class="icon-btn" type="button" data-help="run" aria-label="Help: read a run">?</button></h2>
+      <a class="btn" id="zip" href="#" download>Download drafts and report (.zip)</a>
+    </div>
+    <div class="band" id="band"></div>
+    <div class="tabs" role="tablist" id="tabs"></div>
+    <div id="topic"></div>
+  </section>
+</main>
+
+<aside class="help" id="help" aria-hidden="true" aria-labelledby="help-title" role="dialog">
+  <div class="panel-head"><h2 id="help-title">Help</h2><button class="icon-btn" id="help-close" type="button" aria-label="Close help">×</button></div>
+  <p id="help-short"></p>
+  <ol id="help-steps"></ol>
+  <div class="links" id="help-related"></div>
+  <p><a id="help-open" href="../help/" target="_blank" rel="noopener">Open the full topic</a> · <a href="../help/">Browse the help</a></p>
+</aside>
+<footer class="foot meta">Sample content adapted from Google Cloud TPU documentation under CC BY 4.0, and modified. Google hasn't engaged, sponsored or endorsed this work. Siddharth Rao · AlignR 0.1</footer>
+<script src="app.js"></script>
+</body>
+</html>
