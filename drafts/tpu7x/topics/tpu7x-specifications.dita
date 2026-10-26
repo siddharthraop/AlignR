@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE reference PUBLIC "-//OASIS//DTD DITA Reference//EN" "reference.dtd">
+<reference id="tpu7x-specifications" xml:lang="en-US">
+  <title><keyword keyref="product-tpu7x"/> specifications</title>
+  <shortdesc>Per-chip and per-pod specifications for <keyword keyref="product-tpu7x"/>.</shortdesc>
+  <prolog>
+    <author type="contributor">AlignR draft, for review by a technical writer</author>
+    <critdates>
+      <created date="2026-10-26"/>
+    </critdates>
+    <metadata>
+      <audience type="ml-engineer"/>
+      <othermeta name="generated-by" content="alignr 0.1.0 · run 20261026-041740-4593 · schema 8b76 · model gemini-3.8-flash"/>
+    </metadata>
+    <data name="source" value="tpu7x" href="https://docs.cloud.google.com/tpu/docs/tpu7x" format="html" scope="external"/>
+    <data name="licence" value="CC BY 4.0. Drafted from Google Cloud TPU documentation (adapted and modified) and launch facts."/>
+    <data name="siblings" value="tpu-v6e-specifications.dita tpu-v5p-specifications.dita"/>
+  </prolog>
+  <refbody>
+    <section id="system-architecture">
+      <title>System architecture</title>
+      <table outputclass="spec" id="spec-table">
+        <tgroup cols="3">
+          <colspec colname="c1"/>
+          <colspec colname="c2"/>
+          <colspec colname="c3"/>
+          <thead>
+            <row>
+              <entry>Specification</entry>
+              <entry>Value</entry>
+              <entry>Unit</entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>Number of chips per pod</entry>
+              <entry><keyword keyref="tpu7x-chips-per-pod"/></entry>
+              <entry/>
+            </row>
+            <row>
+              <entry>Peak compute per chip (BF16)</entry>
+              <entry><keyword keyref="tpu7x-peak-bf16"/></entry>
+              <entry>TFLOPs</entry>
+            </row>
+            <row>
+              <entry>Peak compute per chip (FP8)</entry>
+              <entry><keyword keyref="tpu7x-peak-fp8"/></entry>
+              <entry>TFLOPs</entry>
+            </row>
+            <row>
+              <entry>HBM capacity per chip</entry>
+              <entry><keyword keyref="tpu7x-hbm-capacity"/></entry>
+              <entry>GiB</entry>
+            </row>
+            <row>
+              <entry>HBM bandwidth per chip</entry>
+              <entry><keyword keyref="tpu7x-hbm-bandwidth"/></entry>
+              <entry>GBps</entry>
+            </row>
+            <row>
+              <entry>TensorCores per chip</entry>
+              <entry><keyword keyref="tpu7x-tensorcores"/></entry>
+              <entry/>
+            </row>
+            <row>
+              <entry>SparseCores per chip</entry>
+              <entry><keyword keyref="tpu7x-sparsecores"/></entry>
+              <entry/>
+            </row>
+            <row>
+              <entry>Bidirectional ICI bandwidth per chip</entry>
+              <entry><keyword keyref="tpu7x-ici-bandwidth"/></entry>
+              <entry>GBps</entry>
+            </row>
+            <row>
+              <entry>DCN bandwidth per chip</entry>
+              <entry><keyword keyref="tpu7x-dcn-per-chip"/></entry>
+              <entry>Gbps</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      <p>See the memory hierarchy topic for the memory layout of each chip.</p>
+      <draft-comment author="alignr" disposition="open" otherprops="for(writer) about(C1)">For the writer: The sibling topics give HBM capacity in different units (v6e uses GB, v5p uses GiB). TPU7x facts specify GiB. Should we standardize the unit across all generations?</draft-comment>
+      <draft-comment author="alignr" disposition="open" otherprops="for(engineer) about(C2)">For the engineer: Source S1 lists HBM bandwidth as 7380 GBps, whereas source S2 lists it approximately as 7.37 TB/s (which corresponds to 7370 GBps rather than 7380 GBps). Which value is correct?</draft-comment>
+    </section>
+  </refbody>
+</reference>
