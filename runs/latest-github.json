@@ -1,35 +1,35 @@
 {
  "alignr": "0.1.0",
- "run": "20261026-040333-b7dd",
+ "run": "20261026-041014-4045",
  "source": "github",
  "generation": "tpu7x",
  "model": "gemini-3.8-flash",
  "model_kind": "gemini",
- "started": "2026-10-26T04:03:33+00:00",
- "seconds": 267.9,
+ "started": "2026-10-26T04:10:14+00:00",
+ "seconds": 5.6,
  "facts_page": "https://docs.cloud.google.com/tpu/docs/tpu7x",
  "metrics": {
   "grammar_failures_reaching_writer": 0,
   "withheld": 0,
-  "values_total": 82,
-  "values_sourced": 82,
+  "values_total": 79,
+  "values_sourced": 79,
   "values_sourced_pct": 100.0,
-  "edit_ratio_mean": 0.2334,
+  "edit_ratio_mean": 0.1971,
   "edit_ratio_max": 0.339,
   "edit_ratio_target": 0.4,
   "edit_ratio_met": true,
   "topics": 5,
   "topics_with_sibling": 4,
-  "open_questions": 9,
+  "open_questions": 8,
   "model_calls": 5,
   "calls_per_topic": 1.0,
   "cost_logged": true
  },
  "usage": {
   "calls": 5,
-  "tokens_in": 21075,
-  "tokens_out": 62000,
-  "cost_usd": 0.24831
+  "tokens_in": 20492,
+  "tokens_out": 1730,
+  "cost_usd": 0.02186
  },
  "topics": [
   {
@@ -42,7 +42,7 @@
     "topics/tpu-v6e-intro.dita",
     "topics/tpu-v5p-intro.dita"
    ],
-   "schema_hash": "5e82",
+   "schema_hash": "2117",
    "model": "gemini-3.8-flash",
    "model_error": null,
    "answer": {
@@ -59,7 +59,6 @@
        {
         "text": "Use the specification topic to size a slice, the configurations topic to choose a slice shape, and the VM types topic to see what each VM provides.",
         "sources": [
-         "S1",
          "S3",
          "S4"
         ]
@@ -71,7 +70,7 @@
      {
       "for": "engineer",
       "about": "gap",
-      "text": "What is the pod topology for {product-tpu7x}?"
+      "text": "What is the pod topology for TPU7x? Sibling introductions state the pod topology (for example, 3D torus)."
      }
     ]
    },
@@ -104,18 +103,18 @@
     }
    ],
    "questions": [
-    "For the engineer: What is the pod topology for {product-tpu7x}?"
+    "For the engineer: What is the pod topology for TPU7x? Sibling introductions state the pod topology (for example, 3D torus)."
    ],
    "conflicts": [],
    "usage": {
     "calls": 1,
-    "tokens_in": 3824,
-    "tokens_out": 7060,
-    "cost_usd": 0.02934,
-    "model_ms": 47388,
+    "tokens_in": 3733,
+    "tokens_out": 281,
+    "cost_usd": 0.00385,
+    "model_ms": 4388,
     "price": "$0.75/$3.75 per 1M tokens in/out"
    },
-   "ms": 47398,
+   "ms": 4396,
    "stages": [
     {
      "topic": "tpu7x-intro",
@@ -135,7 +134,7 @@
     {
      "topic": "tpu7x-intro",
      "stage": "build_schema",
-     "hash": "5e82"
+     "hash": "2117"
     },
     {
      "topic": "tpu7x-intro",
@@ -172,7 +171,7 @@
     "topics/tpu-v6e-specifications.dita",
     "topics/tpu-v5p-specifications.dita"
    ],
-   "schema_hash": "b57b",
+   "schema_hash": "8b76",
    "model": "gemini-3.8-flash",
    "model_error": null,
    "answer": {
@@ -182,7 +181,14 @@
      "system-architecture": {
       "title": "System architecture",
       "notes": [],
-      "paras": [],
+      "paras": [
+       {
+        "text": "See the memory hierarchy topic for the memory layout of each chip.",
+        "sources": [
+         "S1"
+        ]
+       }
+      ],
       "table": {
        "rows": [
         {
@@ -238,17 +244,12 @@
      {
       "for": "writer",
       "about": "C1",
-      "text": "The sibling topics give HBM capacity in different units (v6e uses GB, while v5p uses GiB). TPU7x facts specify GiB. Which unit should be standardized across TPU specification topics?"
+      "text": "The sibling topics give hbm-capacity in different units (v6e GB, v5p GiB). The tpu7x facts use GiB (S1). Confirm the unit, and correct the sibling that is wrong."
      },
      {
       "for": "engineer",
       "about": "C2",
-      "text": "S1 lists HBM bandwidth as 7380 GBps, but S2 lists it as approximately 7.37 TB/s (7380 GBps converts to 7.38 TB/s). Which value is correct?"
-     },
-     {
-      "for": "engineer",
-      "about": "gap",
-      "text": "What is the maximum multislice scale in chips for {product-tpu7x}?"
+      "text": "S1 gives hbm-bandwidth as 7380 GBps; S2 gives 7.37 TB/s (approximately). 7380 GBps is 7.38 TB/s, so the two sources disagree."
      }
     ]
    },
@@ -281,9 +282,8 @@
     }
    ],
    "questions": [
-    "For the writer: The sibling topics give HBM capacity in different units (v6e uses GB, while v5p uses GiB). TPU7x facts specify GiB. Which unit should be standardized across TPU specification topics?",
-    "For the engineer: S1 lists HBM bandwidth as 7380 GBps, but S2 lists it as approximately 7.37 TB/s (7380 GBps converts to 7.38 TB/s). Which value is correct?",
-    "For the engineer: What is the maximum multislice scale in chips for {product-tpu7x}?"
+    "For the writer: The sibling topics give hbm-capacity in different units (v6e GB, v5p GiB). The tpu7x facts use GiB (S1). Confirm the unit, and correct the sibling that is wrong.",
+    "For the engineer: S1 gives hbm-bandwidth as 7380 GBps; S2 gives 7.37 TB/s (approximately). 7380 GBps is 7.38 TB/s, so the two sources disagree."
    ],
    "conflicts": [
     {
@@ -307,13 +307,13 @@
    ],
    "usage": {
     "calls": 1,
-    "tokens_in": 4912,
-    "tokens_out": 8614,
-    "cost_usd": 0.03599,
-    "model_ms": 53625,
+    "tokens_in": 4725,
+    "tokens_out": 699,
+    "cost_usd": 0.00617,
+    "model_ms": 5582,
     "price": "$0.75/$3.75 per 1M tokens in/out"
    },
-   "ms": 53657,
+   "ms": 5588,
    "stages": [
     {
      "topic": "tpu7x-specifications",
@@ -336,7 +336,7 @@
     {
      "topic": "tpu7x-specifications",
      "stage": "build_schema",
-     "hash": "b57b"
+     "hash": "8b76"
     },
     {
      "topic": "tpu7x-specifications",
@@ -355,11 +355,11 @@
     {
      "topic": "tpu7x-specifications",
      "stage": "open_pr",
-     "questions": 3
+     "questions": 2
     }
    ],
    "compare": {
-    "edit_ratio": 0.2299
+    "edit_ratio": 0.1889
    },
    "published_href": "topics/tpu7x-specifications.dita"
   },
@@ -373,7 +373,7 @@
     "topics/tpu-v6e-configurations.dita",
     "topics/tpu-v5p-configurations.dita"
    ],
-   "schema_hash": "a6f6",
+   "schema_hash": "bbd0",
    "model": "gemini-3.8-flash",
    "model_error": null,
    "answer": {
@@ -383,21 +383,14 @@
      "slice-shapes": {
       "title": "Slice shapes",
       "notes": [
-       "note-slice-shape",
-       "note-tpu-api-tpu7x"
+       "note-slice-shape"
       ],
       "paras": [
        {
-        "text": "Every {product-tpu7x} VM uses the {tpu7x-machine-type} machine type with {tpu7x-chips-per-vm} chips.",
+        "text": "Every slice shape uses the {tpu7x-machine-type} machine type with {tpu7x-chips-per-vm} chips.",
         "sources": [
          "S3",
          "S4"
-        ]
-       },
-       {
-        "text": "Slice shapes take the form `AxBxC`; each dimension is a multiple of 4, up to {tpu7x-chips-per-pod} chips.",
-        "sources": [
-         "S3"
         ]
        },
        {
@@ -409,17 +402,23 @@
       ],
       "table": {
        "columns": [
-        "Topology",
-        "TPU chips",
-        "Hosts",
-        "VMs",
-        "Cubes",
-        "Scope"
+        "slice shape",
+        "number of chips",
+        "number of hosts",
+        "number of VMs",
+        "number of cubes",
+        "scope"
        ]
       }
      }
     },
-    "questions": []
+    "questions": [
+     {
+      "for": "engineer",
+      "about": "gap",
+      "text": "Fact F4 states that slice shapes take the form `AxBxC` where each dimension is a multiple of 4, but the slice-shapes table lists shapes such as 2x2x1, 2x2x2, 2x2x4, and 2x4x4. Could you clarify the dimension constraints for {product-tpu7x} shapes?"
+     }
+    ]
    },
    "withheld": false,
    "grammar": {
@@ -434,8 +433,8 @@
     "rules": "dita-corpus house rules (corpus.sch) + AlignR rules ALR-1 to ALR-4"
    },
    "grounding": {
-    "total": 66,
-    "grounded": 66,
+    "total": 63,
+    "grounded": 63,
     "failures": []
    },
    "remaining_failures": [],
@@ -449,17 +448,19 @@
      "fixes": []
     }
    ],
-   "questions": [],
+   "questions": [
+    "For the engineer: Fact F4 states that slice shapes take the form `AxBxC` where each dimension is a multiple of 4, but the slice-shapes table lists shapes such as 2x2x1, 2x2x2, 2x2x4, and 2x4x4. Could you clarify the dimension constraints for {product-tpu7x} shapes?"
+   ],
    "conflicts": [],
    "usage": {
     "calls": 1,
-    "tokens_in": 4801,
-    "tokens_out": 36358,
-    "cost_usd": 0.13994,
-    "model_ms": 267825,
+    "tokens_in": 4673,
+    "tokens_out": 398,
+    "cost_usd": 0.005,
+    "model_ms": 4458,
     "price": "$0.75/$3.75 per 1M tokens in/out"
    },
-   "ms": 267847,
+   "ms": 4490,
    "stages": [
     {
      "topic": "tpu7x-configurations",
@@ -479,7 +480,7 @@
     {
      "topic": "tpu7x-configurations",
      "stage": "build_schema",
-     "hash": "a6f6"
+     "hash": "bbd0"
     },
     {
      "topic": "tpu7x-configurations",
@@ -498,11 +499,11 @@
     {
      "topic": "tpu7x-configurations",
      "stage": "open_pr",
-     "questions": 0
+     "questions": 1
     }
    ],
    "compare": {
-    "edit_ratio": 0.3318
+    "edit_ratio": 0.2273
    },
    "published_href": "topics/tpu7x-configurations.dita"
   },
@@ -516,7 +517,7 @@
     "topics/tpu-v6e-vm-types.dita",
     "topics/tpu-v5p-vm-types.dita"
    ],
-   "schema_hash": "867e",
+   "schema_hash": "0f4d",
    "model": "gemini-3.8-flash",
    "model_error": null,
    "answer": {
@@ -571,13 +572,13 @@
    "conflicts": [],
    "usage": {
     "calls": 1,
-    "tokens_in": 3933,
-    "tokens_out": 7903,
-    "cost_usd": 0.03259,
-    "model_ms": 60653,
+    "tokens_in": 3746,
+    "tokens_out": 139,
+    "cost_usd": 0.00333,
+    "model_ms": 2794,
     "price": "$0.75/$3.75 per 1M tokens in/out"
    },
-   "ms": 60659,
+   "ms": 2832,
    "stages": [
     {
      "topic": "tpu7x-vm-types",
@@ -597,7 +598,7 @@
     {
      "topic": "tpu7x-vm-types",
      "stage": "build_schema",
-     "hash": "867e"
+     "hash": "0f4d"
     },
     {
      "topic": "tpu7x-vm-types",
@@ -636,16 +637,16 @@
    "model_error": null,
    "answer": {
     "title": "{product-tpu7x} memory architecture",
-    "shortdesc": "Learn about the memory hierarchy of {product-tpu7x}, including the dual-chiplet HBM layout and host memory offloading.",
+    "shortdesc": "Learn about the memory hierarchy, dual-chiplet HBM layout, and host memory offloading for {product-tpu7x}.",
     "outline": [
      {
-      "title": "Dual-chiplet design and HBM",
+      "title": "Dual-chiplet HBM architecture",
       "facts": [
        "F8"
       ]
      },
      {
-      "title": "Host memory and offloading",
+      "title": "Host memory hierarchy and offloading",
       "facts": [
        "F9"
       ]
@@ -655,12 +656,7 @@
      {
       "for": "engineer",
       "about": "C1",
-      "text": "S1 lists HBM bandwidth as {tpu7x-hbm-bandwidth} GBps, while S2 lists approximately 7.37 TB/s. Which value is accurate for {product-tpu7x}?"
-     },
-     {
-      "for": "writer",
-      "about": "gap",
-      "text": "Because no sibling topics exist for earlier generations, what standard structure and headings should be adopted for memory concept topics?"
+      "text": "S1 lists HBM bandwidth as 7380 GBps (7.38 TB/s), while S2 lists it as approximately 7.37 TB/s. Which specification value is accurate for {product-tpu7x}?"
      }
     ]
    },
@@ -694,8 +690,7 @@
    ],
    "questions": [
     "For the writer: This topic is new in tpu7x and has no sibling to draft from. AlignR wrote an outline with the facts each section should cover. Write the prose, then close this comment.",
-    "For the engineer: S1 lists HBM bandwidth as {tpu7x-hbm-bandwidth} GBps, while S2 lists approximately 7.37 TB/s. Which value is accurate for {product-tpu7x}?",
-    "For the writer: Because no sibling topics exist for earlier generations, what standard structure and headings should be adopted for memory concept topics?",
+    "For the engineer: S1 lists HBM bandwidth as 7380 GBps (7.38 TB/s), while S2 lists it as approximately 7.37 TB/s. Which specification value is accurate for {product-tpu7x}?",
     "For the writer: write this section from F8 (S2): Each chip has two chiplets. Each chiplet has one TensorCore, two SparseCores and GiB of HBM.",
     "For the writer: write this section from F9 (S2): Host memory connects to the chip with much lower bandwidth than HBM; it can hold offloaded activations or optimizer states."
    ],
@@ -712,13 +707,13 @@
    ],
    "usage": {
     "calls": 1,
-    "tokens_in": 3605,
-    "tokens_out": 2065,
-    "cost_usd": 0.01045,
-    "model_ms": 16920,
+    "tokens_in": 3615,
+    "tokens_out": 213,
+    "cost_usd": 0.00351,
+    "model_ms": 3842,
     "price": "$0.75/$3.75 per 1M tokens in/out"
    },
-   "ms": 16937,
+   "ms": 3877,
    "stages": [
     {
      "topic": "tpu7x-memory",
@@ -756,11 +751,11 @@
     {
      "topic": "tpu7x-memory",
      "stage": "open_pr",
-     "questions": 5
+     "questions": 4
     }
    ],
    "compare": {
-    "edit_ratio": 0.8571
+    "edit_ratio": 0.8857
    },
    "published_href": "topics/tpu7x-memory.dita"
   }
@@ -770,7 +765,7 @@
  "issue_created": null,
  "prs": [],
  "issue_to_prs_seconds": null,
- "workflow_run": "https://github.com/siddharthraop/AlignR/actions/runs/40267067205",
- "dita_ot": "failure",
- "finished": "2026-10-26T04:08:05+00:00"
+ "workflow_run": "https://github.com/siddharthraop/AlignR/actions/runs/40267635249",
+ "dita_ot": "success",
+ "finished": "2026-10-26T04:10:29+00:00"
 }
