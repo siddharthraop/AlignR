@@ -1,0 +1,804 @@
+{
+ "alignr": "0.1.0",
+ "run": "20261026-041740-4593",
+ "source": "github",
+ "generation": "tpu7x",
+ "model": "gemini-3.8-flash",
+ "model_kind": "gemini",
+ "started": "2026-10-26T04:17:40+00:00",
+ "seconds": 9.2,
+ "facts_page": "https://docs.cloud.google.com/tpu/docs/tpu7x",
+ "metrics": {
+  "grammar_failures_reaching_writer": 0,
+  "withheld": 0,
+  "values_total": 82,
+  "values_sourced": 82,
+  "values_sourced_pct": 100.0,
+  "edit_ratio_mean": 0.2443,
+  "edit_ratio_max": 0.339,
+  "edit_ratio_target": 0.4,
+  "edit_ratio_met": true,
+  "topics": 5,
+  "topics_with_sibling": 4,
+  "open_questions": 7,
+  "model_calls": 5,
+  "calls_per_topic": 1.0,
+  "cost_logged": true
+ },
+ "usage": {
+  "calls": 5,
+  "tokens_in": 20492,
+  "tokens_out": 1622,
+  "cost_usd": 0.02145
+ },
+ "topics": [
+  {
+   "topic_id": "tpu7x-intro",
+   "slot": "intro",
+   "type": "concept",
+   "stub": false,
+   "has_sibling": true,
+   "siblings": [
+    "topics/tpu-v6e-intro.dita",
+    "topics/tpu-v5p-intro.dita"
+   ],
+   "schema_hash": "2117",
+   "model": "gemini-3.8-flash",
+   "model_error": null,
+   "answer": {
+    "title": "{product-tpu7x}",
+    "shortdesc": "{product-tpu7x} is for the largest training and inference workloads. Each chip has {tpu7x-tensorcores} TensorCores and {tpu7x-sparsecores} SparseCores, and a pod holds {tpu7x-chips-per-pod} chips.",
+    "body": {
+     "body": {
+      "title": "",
+      "notes": [
+       "note-tpu-api-tpu7x",
+       "note-tensorflow-tpu7x"
+      ],
+      "paras": [
+       {
+        "text": "See the memory hierarchy topic for the memory layout of each chip.",
+        "sources": [
+         "S1"
+        ]
+       }
+      ]
+     }
+    },
+    "questions": [
+     {
+      "for": "engineer",
+      "about": "gap",
+      "text": "What is the pod topology for TPU7x?"
+     }
+    ]
+   },
+   "withheld": false,
+   "grammar": {
+    "valid": true,
+    "grammar": "DITA 1.3 concept (RELAX NG)",
+    "errors": []
+   },
+   "rules": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "rules": "dita-corpus house rules (corpus.sch) + AlignR rules ALR-1 to ALR-4"
+   },
+   "grounding": {
+    "total": 3,
+    "grounded": 3,
+    "failures": []
+   },
+   "remaining_failures": [],
+   "fixes": [],
+   "revisions": 0,
+   "resolved": [],
+   "history": [
+    {
+     "attempt": 1,
+     "failures": [],
+     "fixes": []
+    }
+   ],
+   "questions": [
+    "For the engineer: What is the pod topology for TPU7x?"
+   ],
+   "conflicts": [],
+   "usage": {
+    "calls": 1,
+    "tokens_in": 3733,
+    "tokens_out": 236,
+    "cost_usd": 0.00368,
+    "model_ms": 8294,
+    "price": "$0.75/$3.75 per 1M tokens in/out"
+   },
+   "ms": 8297,
+   "stages": [
+    {
+     "topic": "tpu7x-intro",
+     "stage": "find_siblings",
+     "siblings": [
+      "topics/tpu-v6e-intro.dita",
+      "topics/tpu-v5p-intro.dita"
+     ],
+     "stub": false
+    },
+    {
+     "topic": "tpu7x-intro",
+     "stage": "load_facts",
+     "values": 16,
+     "conflicts": []
+    },
+    {
+     "topic": "tpu7x-intro",
+     "stage": "build_schema",
+     "hash": "2117"
+    },
+    {
+     "topic": "tpu7x-intro",
+     "stage": "generate_topic",
+     "model": "gemini-3.8-flash",
+     "calls": 1,
+     "error": null
+    },
+    {
+     "topic": "tpu7x-intro",
+     "stage": "checks",
+     "attempt": 1,
+     "failures": 0,
+     "fixes": []
+    },
+    {
+     "topic": "tpu7x-intro",
+     "stage": "open_pr",
+     "questions": 1
+    }
+   ],
+   "compare": {
+    "edit_ratio": 0.3223
+   },
+   "published_href": "topics/tpu7x-intro.dita"
+  },
+  {
+   "topic_id": "tpu7x-specifications",
+   "slot": "specifications",
+   "type": "reference",
+   "stub": false,
+   "has_sibling": true,
+   "siblings": [
+    "topics/tpu-v6e-specifications.dita",
+    "topics/tpu-v5p-specifications.dita"
+   ],
+   "schema_hash": "8b76",
+   "model": "gemini-3.8-flash",
+   "model_error": null,
+   "answer": {
+    "title": "{product-tpu7x} specifications",
+    "shortdesc": "Per-chip and per-pod specifications for {product-tpu7x}.",
+    "body": {
+     "system-architecture": {
+      "title": "System architecture",
+      "notes": [],
+      "paras": [
+       {
+        "text": "See the memory hierarchy topic for the memory layout of each chip.",
+        "sources": [
+         "S1"
+        ]
+       }
+      ],
+      "table": {
+       "rows": [
+        {
+         "label": "Number of chips per pod",
+         "key": "tpu7x-chips-per-pod",
+         "unit": "none"
+        },
+        {
+         "label": "Peak compute per chip (BF16)",
+         "key": "tpu7x-peak-bf16",
+         "unit": "TFLOPs"
+        },
+        {
+         "label": "Peak compute per chip (FP8)",
+         "key": "tpu7x-peak-fp8",
+         "unit": "TFLOPs"
+        },
+        {
+         "label": "HBM capacity per chip",
+         "key": "tpu7x-hbm-capacity",
+         "unit": "GiB"
+        },
+        {
+         "label": "HBM bandwidth per chip",
+         "key": "tpu7x-hbm-bandwidth",
+         "unit": "GBps"
+        },
+        {
+         "label": "TensorCores per chip",
+         "key": "tpu7x-tensorcores",
+         "unit": "none"
+        },
+        {
+         "label": "SparseCores per chip",
+         "key": "tpu7x-sparsecores",
+         "unit": "none"
+        },
+        {
+         "label": "Bidirectional ICI bandwidth per chip",
+         "key": "tpu7x-ici-bandwidth",
+         "unit": "GBps"
+        },
+        {
+         "label": "DCN bandwidth per chip",
+         "key": "tpu7x-dcn-per-chip",
+         "unit": "Gbps"
+        }
+       ]
+      }
+     }
+    },
+    "questions": [
+     {
+      "for": "writer",
+      "about": "C1",
+      "text": "The sibling topics give HBM capacity in different units (v6e uses GB, v5p uses GiB). TPU7x facts specify GiB. Should we standardize the unit across all generations?"
+     },
+     {
+      "for": "engineer",
+      "about": "C2",
+      "text": "Source S1 lists HBM bandwidth as 7380 GBps, whereas source S2 lists it approximately as 7.37 TB/s (which corresponds to 7370 GBps rather than 7380 GBps). Which value is correct?"
+     }
+    ]
+   },
+   "withheld": false,
+   "grammar": {
+    "valid": true,
+    "grammar": "DITA 1.3 reference (RELAX NG)",
+    "errors": []
+   },
+   "rules": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "rules": "dita-corpus house rules (corpus.sch) + AlignR rules ALR-1 to ALR-4"
+   },
+   "grounding": {
+    "total": 9,
+    "grounded": 9,
+    "failures": []
+   },
+   "remaining_failures": [],
+   "fixes": [],
+   "revisions": 0,
+   "resolved": [],
+   "history": [
+    {
+     "attempt": 1,
+     "failures": [],
+     "fixes": []
+    }
+   ],
+   "questions": [
+    "For the writer: The sibling topics give HBM capacity in different units (v6e uses GB, v5p uses GiB). TPU7x facts specify GiB. Should we standardize the unit across all generations?",
+    "For the engineer: Source S1 lists HBM bandwidth as 7380 GBps, whereas source S2 lists it approximately as 7.37 TB/s (which corresponds to 7370 GBps rather than 7380 GBps). Which value is correct?"
+   ],
+   "conflicts": [
+    {
+     "id": "C1",
+     "kind": "siblings",
+     "quantity": "hbm-capacity",
+     "detail": "The sibling topics give hbm-capacity in different units (v6e GB, v5p GiB). The tpu7x facts use GiB (S1). Confirm the unit, and correct the sibling that is wrong.",
+     "ask": "writer",
+     "key": "tpu7x-hbm-capacity",
+     "known_issue": "KI-1"
+    },
+    {
+     "id": "C2",
+     "kind": "sources",
+     "quantity": "hbm-bandwidth",
+     "detail": "S1 gives hbm-bandwidth as 7380 GBps; S2 gives 7.37 TB/s (approximately). 7380 GBps is 7.38 TB/s, so the two sources disagree.",
+     "ask": "engineer",
+     "key": "tpu7x-hbm-bandwidth",
+     "known_issue": "KI-2"
+    }
+   ],
+   "usage": {
+    "calls": 1,
+    "tokens_in": 4725,
+    "tokens_out": 697,
+    "cost_usd": 0.00616,
+    "model_ms": 6023,
+    "price": "$0.75/$3.75 per 1M tokens in/out"
+   },
+   "ms": 6033,
+   "stages": [
+    {
+     "topic": "tpu7x-specifications",
+     "stage": "find_siblings",
+     "siblings": [
+      "topics/tpu-v6e-specifications.dita",
+      "topics/tpu-v5p-specifications.dita"
+     ],
+     "stub": false
+    },
+    {
+     "topic": "tpu7x-specifications",
+     "stage": "load_facts",
+     "values": 16,
+     "conflicts": [
+      "C1 siblings",
+      "C2 sources"
+     ]
+    },
+    {
+     "topic": "tpu7x-specifications",
+     "stage": "build_schema",
+     "hash": "8b76"
+    },
+    {
+     "topic": "tpu7x-specifications",
+     "stage": "generate_topic",
+     "model": "gemini-3.8-flash",
+     "calls": 1,
+     "error": null
+    },
+    {
+     "topic": "tpu7x-specifications",
+     "stage": "checks",
+     "attempt": 1,
+     "failures": 0,
+     "fixes": []
+    },
+    {
+     "topic": "tpu7x-specifications",
+     "stage": "open_pr",
+     "questions": 2
+    }
+   ],
+   "compare": {
+    "edit_ratio": 0.1889
+   },
+   "published_href": "topics/tpu7x-specifications.dita"
+  },
+  {
+   "topic_id": "tpu7x-configurations",
+   "slot": "configurations",
+   "type": "reference",
+   "stub": false,
+   "has_sibling": true,
+   "siblings": [
+    "topics/tpu-v6e-configurations.dita",
+    "topics/tpu-v5p-configurations.dita"
+   ],
+   "schema_hash": "bbd0",
+   "model": "gemini-3.8-flash",
+   "model_error": null,
+   "answer": {
+    "title": "{product-tpu7x} supported configurations",
+    "shortdesc": "The slice shapes you can request for {product-tpu7x}, and how many chips and hosts each uses.",
+    "body": {
+     "slice-shapes": {
+      "title": "Slice shapes",
+      "notes": [
+       "note-slice-shape"
+      ],
+      "paras": [
+       {
+        "text": "Slice shapes take the form `AxBxC`; each dimension is a multiple of 4, up to {tpu7x-chips-per-pod} chips.",
+        "sources": [
+         "S3"
+        ]
+       },
+       {
+        "text": "Every slice shape uses the {tpu7x-machine-type} machine type with {tpu7x-chips-per-vm} chips.",
+        "sources": [
+         "S3",
+         "S4"
+        ]
+       },
+       {
+        "text": "Slices larger than {tpu7x-max-api-slice} chips need a request to the account team.",
+        "sources": [
+         "S3"
+        ]
+       }
+      ],
+      "table": {
+       "columns": [
+        "slice shape",
+        "number of chips",
+        "number of hosts",
+        "number of VMs",
+        "number of cubes",
+        "scope"
+       ]
+      }
+     }
+    },
+    "questions": []
+   },
+   "withheld": false,
+   "grammar": {
+    "valid": true,
+    "grammar": "DITA 1.3 reference (RELAX NG)",
+    "errors": []
+   },
+   "rules": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "rules": "dita-corpus house rules (corpus.sch) + AlignR rules ALR-1 to ALR-4"
+   },
+   "grounding": {
+    "total": 66,
+    "grounded": 66,
+    "failures": []
+   },
+   "remaining_failures": [],
+   "fixes": [],
+   "revisions": 0,
+   "resolved": [],
+   "history": [
+    {
+     "attempt": 1,
+     "failures": [],
+     "fixes": []
+    }
+   ],
+   "questions": [],
+   "conflicts": [],
+   "usage": {
+    "calls": 1,
+    "tokens_in": 4673,
+    "tokens_out": 348,
+    "cost_usd": 0.00481,
+    "model_ms": 9158,
+    "price": "$0.75/$3.75 per 1M tokens in/out"
+   },
+   "ms": 9163,
+   "stages": [
+    {
+     "topic": "tpu7x-configurations",
+     "stage": "find_siblings",
+     "siblings": [
+      "topics/tpu-v6e-configurations.dita",
+      "topics/tpu-v5p-configurations.dita"
+     ],
+     "stub": false
+    },
+    {
+     "topic": "tpu7x-configurations",
+     "stage": "load_facts",
+     "values": 16,
+     "conflicts": []
+    },
+    {
+     "topic": "tpu7x-configurations",
+     "stage": "build_schema",
+     "hash": "bbd0"
+    },
+    {
+     "topic": "tpu7x-configurations",
+     "stage": "generate_topic",
+     "model": "gemini-3.8-flash",
+     "calls": 1,
+     "error": null
+    },
+    {
+     "topic": "tpu7x-configurations",
+     "stage": "checks",
+     "attempt": 1,
+     "failures": 0,
+     "fixes": []
+    },
+    {
+     "topic": "tpu7x-configurations",
+     "stage": "open_pr",
+     "questions": 0
+    }
+   ],
+   "compare": {
+    "edit_ratio": 0.127
+   },
+   "published_href": "topics/tpu7x-configurations.dita"
+  },
+  {
+   "topic_id": "tpu7x-vm-types",
+   "slot": "vm-types",
+   "type": "reference",
+   "stub": false,
+   "has_sibling": true,
+   "siblings": [
+    "topics/tpu-v6e-vm-types.dita",
+    "topics/tpu-v5p-vm-types.dita"
+   ],
+   "schema_hash": "0f4d",
+   "model": "gemini-3.8-flash",
+   "model_error": null,
+   "answer": {
+    "title": "{product-tpu7x} VM types",
+    "shortdesc": "The VM types available for {product-tpu7x} and the host resources each one provides.",
+    "body": {
+     "vm-types": {
+      "title": "VM types",
+      "notes": [],
+      "paras": [],
+      "table": {
+       "columns": [
+        "Machine type",
+        "Chips per VM",
+        "vCPUs",
+        "RAM (GB)"
+       ]
+      }
+     }
+    },
+    "questions": []
+   },
+   "withheld": false,
+   "grammar": {
+    "valid": true,
+    "grammar": "DITA 1.3 reference (RELAX NG)",
+    "errors": []
+   },
+   "rules": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "rules": "dita-corpus house rules (corpus.sch) + AlignR rules ALR-1 to ALR-4"
+   },
+   "grounding": {
+    "total": 4,
+    "grounded": 4,
+    "failures": []
+   },
+   "remaining_failures": [],
+   "fixes": [],
+   "revisions": 0,
+   "resolved": [],
+   "history": [
+    {
+     "attempt": 1,
+     "failures": [],
+     "fixes": []
+    }
+   ],
+   "questions": [],
+   "conflicts": [],
+   "usage": {
+    "calls": 1,
+    "tokens_in": 3746,
+    "tokens_out": 139,
+    "cost_usd": 0.00333,
+    "model_ms": 2462,
+    "price": "$0.75/$3.75 per 1M tokens in/out"
+   },
+   "ms": 2478,
+   "stages": [
+    {
+     "topic": "tpu7x-vm-types",
+     "stage": "find_siblings",
+     "siblings": [
+      "topics/tpu-v6e-vm-types.dita",
+      "topics/tpu-v5p-vm-types.dita"
+     ],
+     "stub": false
+    },
+    {
+     "topic": "tpu7x-vm-types",
+     "stage": "load_facts",
+     "values": 16,
+     "conflicts": []
+    },
+    {
+     "topic": "tpu7x-vm-types",
+     "stage": "build_schema",
+     "hash": "0f4d"
+    },
+    {
+     "topic": "tpu7x-vm-types",
+     "stage": "generate_topic",
+     "model": "gemini-3.8-flash",
+     "calls": 1,
+     "error": null
+    },
+    {
+     "topic": "tpu7x-vm-types",
+     "stage": "checks",
+     "attempt": 1,
+     "failures": 0,
+     "fixes": []
+    },
+    {
+     "topic": "tpu7x-vm-types",
+     "stage": "open_pr",
+     "questions": 0
+    }
+   ],
+   "compare": {
+    "edit_ratio": 0.339
+   },
+   "published_href": "topics/tpu7x-vm-types.dita"
+  },
+  {
+   "topic_id": "tpu7x-memory",
+   "slot": "memory",
+   "type": "concept",
+   "stub": true,
+   "has_sibling": false,
+   "siblings": [],
+   "schema_hash": "1b5a",
+   "model": "gemini-3.8-flash",
+   "model_error": null,
+   "answer": {
+    "title": "TPU7x memory architecture",
+    "shortdesc": "Learn about the high-bandwidth memory (HBM) and host memory hierarchy on {product-tpu7x}.",
+    "outline": [
+     {
+      "title": "Dual-chiplet HBM architecture",
+      "facts": [
+       "F8"
+      ]
+     },
+     {
+      "title": "Host memory hierarchy",
+      "facts": [
+       "F9"
+      ]
+     }
+    ],
+    "questions": [
+     {
+      "for": "engineer",
+      "about": "C1",
+      "text": "S1 lists the HBM bandwidth as {tpu7x-hbm-bandwidth} GBps (which equals 7.38 TB/s), while S2 reports it as approximately 7.37 TB/s. Which value is correct?"
+     }
+    ]
+   },
+   "withheld": false,
+   "grammar": {
+    "valid": true,
+    "grammar": "DITA 1.3 concept (RELAX NG)",
+    "errors": []
+   },
+   "rules": {
+    "pass": true,
+    "errors": [],
+    "warnings": [],
+    "rules": "dita-corpus house rules (corpus.sch) + AlignR rules ALR-1 to ALR-4"
+   },
+   "grounding": {
+    "total": 0,
+    "grounded": 0,
+    "failures": []
+   },
+   "remaining_failures": [],
+   "fixes": [],
+   "revisions": 0,
+   "resolved": [],
+   "history": [
+    {
+     "attempt": 1,
+     "failures": [],
+     "fixes": []
+    }
+   ],
+   "questions": [
+    "For the writer: This topic is new in tpu7x and has no sibling to draft from. AlignR wrote an outline with the facts each section should cover. Write the prose, then close this comment.",
+    "For the engineer: S1 lists the HBM bandwidth as {tpu7x-hbm-bandwidth} GBps (which equals 7.38 TB/s), while S2 reports it as approximately 7.37 TB/s. Which value is correct?",
+    "For the writer: write this section from F8 (S2): Each chip has two chiplets. Each chiplet has one TensorCore, two SparseCores and GiB of HBM.",
+    "For the writer: write this section from F9 (S2): Host memory connects to the chip with much lower bandwidth than HBM; it can hold offloaded activations or optimizer states."
+   ],
+   "conflicts": [
+    {
+     "id": "C1",
+     "kind": "sources",
+     "quantity": "hbm-bandwidth",
+     "detail": "S1 gives hbm-bandwidth as 7380 GBps; S2 gives 7.37 TB/s (approximately). 7380 GBps is 7.38 TB/s, so the two sources disagree.",
+     "ask": "engineer",
+     "key": "tpu7x-hbm-bandwidth",
+     "known_issue": "KI-2"
+    }
+   ],
+   "usage": {
+    "calls": 1,
+    "tokens_in": 3615,
+    "tokens_out": 202,
+    "cost_usd": 0.00347,
+    "model_ms": 2987,
+    "price": "$0.75/$3.75 per 1M tokens in/out"
+   },
+   "ms": 2999,
+   "stages": [
+    {
+     "topic": "tpu7x-memory",
+     "stage": "find_siblings",
+     "siblings": [],
+     "stub": true
+    },
+    {
+     "topic": "tpu7x-memory",
+     "stage": "load_facts",
+     "values": 16,
+     "conflicts": [
+      "C1 sources"
+     ]
+    },
+    {
+     "topic": "tpu7x-memory",
+     "stage": "build_schema",
+     "hash": "1b5a"
+    },
+    {
+     "topic": "tpu7x-memory",
+     "stage": "generate_topic",
+     "model": "gemini-3.8-flash",
+     "calls": 1,
+     "error": null
+    },
+    {
+     "topic": "tpu7x-memory",
+     "stage": "checks",
+     "attempt": 1,
+     "failures": 0,
+     "fixes": []
+    },
+    {
+     "topic": "tpu7x-memory",
+     "stage": "open_pr",
+     "questions": 4
+    }
+   ],
+   "compare": {
+    "edit_ratio": 0.8714
+   },
+   "published_href": "topics/tpu7x-memory.dita"
+  }
+ ],
+ "proposals": [],
+ "issue": 1,
+ "issue_created": "2026-10-26T04:17:19Z",
+ "prs": [
+  {
+   "topic": "tpu7x-intro",
+   "number": 2,
+   "url": "https://github.com/siddharthraop/AlignR/pull/2",
+   "questions": 1,
+   "opened": "2026-10-26T04:18:12+00:00"
+  },
+  {
+   "topic": "tpu7x-specifications",
+   "number": 3,
+   "url": "https://github.com/siddharthraop/AlignR/pull/3",
+   "questions": 2,
+   "opened": "2026-10-26T04:18:21+00:00"
+  },
+  {
+   "topic": "tpu7x-configurations",
+   "number": 4,
+   "url": "https://github.com/siddharthraop/AlignR/pull/4",
+   "questions": 0,
+   "opened": "2026-10-26T04:18:30+00:00"
+  },
+  {
+   "topic": "tpu7x-vm-types",
+   "number": 5,
+   "url": "https://github.com/siddharthraop/AlignR/pull/5",
+   "questions": 0,
+   "opened": "2026-10-26T04:18:39+00:00"
+  },
+  {
+   "topic": "tpu7x-memory",
+   "number": 6,
+   "url": "https://github.com/siddharthraop/AlignR/pull/6",
+   "questions": 4,
+   "opened": "2026-10-26T04:18:49+00:00"
+  }
+ ],
+ "issue_to_prs_seconds": 90,
+ "workflow_run": "https://github.com/siddharthraop/AlignR/actions/runs/40268294080",
+ "dita_ot": "success",
+ "finished": "2026-10-26T04:18:49+00:00"
+}
