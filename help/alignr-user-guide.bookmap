@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE bookmap PUBLIC "-//OASIS//DTD DITA BookMap//EN" "bookmap.dtd">
+<!-- The user guide: the same topics as the online help, ordered as a book and built to PDF. -->
+<bookmap id="alignr-user-guide" xml:lang="en-US">
+  <booktitle><mainbooktitle>AlignR User Guide</mainbooktitle><booktitlealt>Draft new DITA topics from the ones you have</booktitlealt></booktitle>
+  <bookmeta><authorinformation><personinfo><namedetails><personname><firstname>Siddharth</firstname><lastname>Rao</lastname></personname></namedetails></personinfo></authorinformation>
+    <bookrights><copyrfirst><year>2026</year></copyrfirst><bookowner><person>Siddharth Rao</person></bookowner></bookrights></bookmeta>
+  <frontmatter><booklists><toc/></booklists><mapref href="keys/alignr-keys.ditamap" processing-role="resource-only"/></frontmatter>
+  <chapter href="topics/gs-overview.dita"><topicref href="topics/c-scorecard.dita"/><topicref href="topics/c-holdout.dita"/></chapter>
+  <chapter href="topics/t-draft-generation.dita"><topicref href="topics/t-read-run.dita"/></chapter>
+  <chapter href="topics/t-request-set.dita"><topicref href="topics/t-review-pr.dita"/><topicref href="topics/t-write-facts.dita"/></chapter>
+  <chapter href="topics/c-gates.dita"><topicref href="topics/c-questions.dita"/></chapter>
+  <appendices>
+    <appendix href="topics/r-checks.dita"><topicref href="topics/r-statuses.dita"/><topicref href="topics/r-facts-file.dita"/><topicref href="topics/r-api.dita"/></appendix>
+    <appendix href="topics/ts-problems.dita"/>
+    <appendix href="topics/r-glossary.dita"/>
+    <appendix href="topics/rn-0-1-0.dita"/>
+  </appendices>
+</bookmap>

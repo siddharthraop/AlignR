@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE reference PUBLIC "-//OASIS//DTD DITA Reference//EN" "reference.dtd">
+<reference id="r-checks" xml:lang="en-US">
+  <title>Checks and rule IDs</title>
+  <shortdesc>Every check a draft passes, what it stops, and whether it fails the draft or only warns.</shortdesc>
+  <refbody>
+    <table id="checks"><tgroup cols="3"><colspec colname="id"/><colspec colname="what"/><colspec colname="role"/>
+      <thead><row><entry>Check or rule</entry><entry>What it stops</entry><entry>Result</entry></row></thead>
+      <tbody>
+        <row><entry>JSON Schema (gate 1)</entry><entry>Missing fields, wrong types, keys, sources, notes or conflicts that don't exist, too many or too few rows</entry><entry>Revise</entry></row>
+        <row><entry>DITA grammar (gate 2)</entry><entry>XML that isn't valid against the OASIS DITA 1.3 RELAX NG grammar</entry><entry>Withhold</entry></row>
+        <row><entry>SD-1</entry><entry>A topic with no short description</entry><entry>Revise</entry></row>
+        <row><entry>LIC-1</entry><entry>A topic with no licence notice</entry><entry>Fail</entry></row>
+        <row><entry>SPEC-1</entry><entry>A number typed into a specification table instead of a key reference</entry><entry>Fail</entry></row>
+        <row><entry>SPEC-2</entry><entry>A number with a hardware unit typed into prose</entry><entry>Warn</entry></row>
+        <row><entry>ALR-1</entry><entry>A draft that doesn't record its run, schema and model</entry><entry>Fail</entry></row>
+        <row><entry>ALR-2</entry><entry>A table header that differs from the header every sibling uses</entry><entry>Revise</entry></row>
+        <row><entry>ALR-3</entry><entry>A short description longer than 300 characters</entry><entry>Warn</entry></row>
+        <row><entry>ALR-4</entry><entry>A draft comment with no disposition</entry><entry>Fail</entry></row>
+        <row><entry>Grounding: key</entry><entry>A key that isn't defined for the generation, or a key from a source the paragraph doesn't cite</entry><entry>Revise</entry></row>
+        <row><entry>Grounding: value and unit</entry><entry>A number with no matching fact, or the right number in the wrong unit, such as GB for GiB</entry><entry>Revise</entry></row>
+        <row><entry>Grounding: code</entry><entry>A flag, command or pattern that no fact contains</entry><entry>Revise</entry></row>
+        <row><entry>Open questions (merge)</entry><entry>A merge while any draft comment is open</entry><entry>Block merge</entry></row>
+      </tbody></tgroup></table>
+    <section id="results"><title>Results</title>
+      <p><b>Revise</b>: the model revises only the failed fields, up to <keyword keyref="max-revisions"/> times, then the
+        field becomes a question. <b>Withhold</b>: the topic doesn't reach a writer. <b>Fail</b>: the rule fails the gate.
+        <b>Warn</b>: the rule is reported and doesn't fail.</p></section>
+  </refbody>
+</reference>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
+<task id="t-request-set" xml:lang="en-US">
+  <title>Request a generation set from an issue</title>
+  <shortdesc>Open a <xref keyref="new-issue-url"/> issue in <xref keyref="repo-url"/>. <keyword keyref="product"/> drafts
+    the set and opens one draft pull request per topic, usually in under <keyword keyref="time-target"/>.</shortdesc>
+  <taskbody>
+    <prereq><p>The launch facts file for the generation is in the repository's <filepath>facts</filepath> folder. See
+      <xref href="t-write-facts.dita"/>.</p></prereq>
+    <steps>
+      <step><cmd>Open <xref keyref="new-issue-url"/>.</cmd></step>
+      <step><cmd>In <uicontrol>Launch facts file</uicontrol>, enter the path, for example
+        <filepath>facts/tpu7x.yaml</filepath>.</cmd></step>
+      <step><cmd>Select <uicontrol>Create</uicontrol>.</cmd><info><p>The <codeph>alignr</codeph> workflow starts. It drafts
+        the set, builds it with DITA-OT in strict mode with the drafts in place, and opens the pull requests.</p></info></step>
+      <step><cmd>Wait for the comment on the issue.</cmd><info><p>It lists each topic, its pull request and its open
+        questions, and the time from the issue to the last pull request.</p></info></step>
+    </steps>
+    <result><p>Each pull request is a draft, labeled <codeph>alignr:draft</codeph>, with the topic's report as its
+      description and five statuses. See <xref href="r-statuses.dita"/>.</p></result>
+  </taskbody>
+</task>

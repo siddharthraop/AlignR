@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE reference PUBLIC "-//OASIS//DTD DITA Reference//EN" "reference.dtd">
+<reference id="r-statuses" xml:lang="en-US">
+  <title>Pull request statuses</title>
+  <shortdesc>Each draft pull request carries five commit statuses. The <codeph>gates</codeph> workflow sets the grammar and
+    open-questions statuses again on every push.</shortdesc>
+  <refbody>
+    <table id="statuses"><tgroup cols="3"><colspec colname="c"/><colspec colname="p"/><colspec colname="f"/>
+      <thead><row><entry>Status</entry><entry>Passes when</entry><entry>Set by</entry></row></thead>
+      <tbody>
+        <row><entry><codeph>alignr/grammar</codeph></entry><entry>The topic is valid DITA and the house rules pass</entry><entry>alignr, gates</entry></row>
+        <row><entry><codeph>alignr/rules</codeph></entry><entry>No Schematron rule fails</entry><entry>alignr</entry></row>
+        <row><entry><codeph>alignr/grounding</codeph></entry><entry>Every value has a key or a source</entry><entry>alignr</entry></row>
+        <row><entry><codeph>alignr/dita-ot</codeph></entry><entry>DITA-OT builds the whole set, with the drafts in place, in strict mode</entry><entry>alignr</entry></row>
+        <row><entry><codeph>alignr/open-questions</codeph></entry><entry>No draft comment is open</entry><entry>alignr, gates</entry></row>
+      </tbody></tgroup></table>
+  </refbody>
+</reference>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE map PUBLIC "-//OASIS//DTD DITA Map//EN" "map.dtd">
+<map id="alignr-help" xml:lang="en-US">
+  <title>AlignR Help</title>
+  <topicmeta><shortdesc>How to draft a generation's DITA topics with AlignR, read the results, and review the drafts.</shortdesc></topicmeta>
+  <mapref href="keys/alignr-keys.ditamap" processing-role="resource-only"/>
+  <topicref href="topics/gs-overview.dita">
+    <topicref href="topics/c-scorecard.dita"/>
+  </topicref>
+  <topichead navtitle="Use AlignR">
+    <topicref href="topics/t-draft-generation.dita"/>
+    <topicref href="topics/t-read-run.dita"/>
+    <topicref href="topics/t-request-set.dita"/>
+    <topicref href="topics/t-review-pr.dita"/>
+    <topicref href="topics/t-write-facts.dita"/>
+  </topichead>
+  <topichead navtitle="Concepts">
+    <topicref href="topics/c-gates.dita"/>
+    <topicref href="topics/c-questions.dita"/>
+    <topicref href="topics/c-holdout.dita"/>
+  </topichead>
+  <topichead navtitle="Reference">
+    <topicref href="topics/r-checks.dita"/>
+    <topicref href="topics/r-statuses.dita"/>
+    <topicref href="topics/r-facts-file.dita"/>
+    <topicref href="topics/r-api.dita"/>
+    <topicref href="topics/r-glossary.dita"/>
+  </topichead>
+  <topicref href="topics/ts-problems.dita"/>
+  <topicref href="topics/rn-0-1-0.dita"/>
+  <reltable id="help-reltable">
+    <relheader><relcolspec type="concept"/><relcolspec type="task"/><relcolspec type="reference"/></relheader>
+    <relrow><relcell><topicref href="topics/c-scorecard.dita"/><topicref href="topics/c-holdout.dita"/></relcell><relcell><topicref href="topics/t-draft-generation.dita"/><topicref href="topics/t-read-run.dita"/></relcell><relcell><topicref href="topics/r-api.dita"/></relcell></relrow>
+    <relrow><relcell><topicref href="topics/c-gates.dita"/><topicref href="topics/c-questions.dita"/></relcell><relcell><topicref href="topics/t-review-pr.dita"/><topicref href="topics/t-request-set.dita"/></relcell><relcell><topicref href="topics/r-checks.dita"/><topicref href="topics/r-statuses.dita"/></relcell></relrow>
+    <relrow><relcell><topicref href="topics/gs-overview.dita"/></relcell><relcell><topicref href="topics/t-write-facts.dita"/></relcell><relcell><topicref href="topics/r-facts-file.dita"/></relcell></relrow>
+  </reltable>
+</map>

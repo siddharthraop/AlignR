@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
+<task id="t-read-run" xml:lang="en-US">
+  <title>Read a run</title>
+  <shortdesc>A run shows the set's results in a band, then each topic: its checks, the draft beside the published topic, the
+    DITA XML and the report a writer sees on the pull request.</shortdesc>
+  <prolog><resourceid appname="alignr-app" appid="run"/></prolog>
+  <taskbody>
+    <steps>
+      <step><cmd>Read the band.</cmd><info><p>It gives the model, the time to draft the set, grammar failures that reached a
+        writer, the share of values with a key or a source, the mean edit ratio, the open questions and the logged
+        cost.</p></info></step>
+      <step><cmd>Select a topic tab.</cmd><info><p>The tab shows the topic's edit ratio, or <uicontrol>stub · no
+        sibling</uicontrol> for a topic that is new in the generation.</p></info></step>
+      <step><cmd>Read the checks.</cmd><info><p><uicontrol>Grammar</uicontrol>, <uicontrol>Rules</uicontrol> and
+        <uicontrol>Grounding</uicontrol> are the gates. <uicontrol>Built from</uicontrol> names the sibling topics.
+        <uicontrol>Safe fixes</uicontrol>, when shown, are changes code made without asking the model again.</p></info></step>
+      <step><cmd>Compare the draft with the published topic.</cmd><info><p>Questions show as dashed boxes in the draft. A
+        published topic never shows them, because DITA processors hide draft comments.</p></info></step>
+      <step><cmd>Expand <uicontrol>DITA XML of the draft</uicontrol> to see the key references and draft comments, or
+        <uicontrol>Checks on each attempt</uicontrol> to see what failed before a revision.</cmd></step>
+    </steps>
+  </taskbody>
+</task>

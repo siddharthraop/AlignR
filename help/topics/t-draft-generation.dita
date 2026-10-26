@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
+<task id="t-draft-generation" xml:lang="en-US">
+  <title>Draft a held-out generation</title>
+  <shortdesc>Draft the TPU7x topic set on <xref keyref="app-url"/>, then compare each draft with the topic Google
+    published.</shortdesc>
+  <prolog><resourceid appname="alignr-app" appid="draft"/></prolog>
+  <taskbody>
+    <context><p>Each draft calls <keyword keyref="model"/>, so the page allows <keyword keyref="daily-cap"/> public drafts a
+      day. The page shows the latest run while you wait, so you can read a run without drafting.</p></context>
+    <steps>
+      <step><cmd>Open <xref keyref="app-url"/>.</cmd></step>
+      <step><cmd>In <uicontrol>Generation</uicontrol>, select <uicontrol>TPU7x (Ironwood), held out</uicontrol>.</cmd></step>
+      <step><cmd>Select <uicontrol>Draft</uicontrol>.</cmd><info><p>Each topic moves through the agent's stages: find_siblings,
+        load_facts, build_schema, generate_topic, checks, revise and open_pr. A set takes about a minute.</p></info></step>
+      <step><cmd>When the run finishes, select a topic tab to see the draft beside the published topic.</cmd></step>
+      <step><cmd>Select <uicontrol>Download drafts and report (.zip)</uicontrol> to keep the DITA topics and the
+        reports.</cmd></step>
+    </steps>
+    <result><p>The scorecard at the top of the page updates with the run's measured values.</p></result>
+    <postreq><p>If the page says today's drafts are used up, it shows the latest run instead. Try again the next day
+      (UTC).</p></postreq>
+  </taskbody>
+</task>

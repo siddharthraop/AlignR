@@ -51,7 +51,7 @@ jobs:
           GOOGLE_API_KEY: ${{ steps.secrets.outputs.gemini }}
           ALIGNR_MODEL: ${{ vars.ALIGNR_MODEL || 'gemini-3.8-flash' }}
         run: alignr draft --facts "${{ steps.facts.outputs.path }}" --model gemini --source github --out out/run -v 2> out-events.ndjson
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v5
         with: {distribution: temurin, java-version: "21"}
       - id: dita-cache
         uses: actions/cache@v4

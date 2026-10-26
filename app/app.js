@@ -64,7 +64,9 @@
       fetch(CFG.runs + "latest-github.json", { cache: "no-store" }).then((r) => (r.ok ? r.json() : null)).catch(() => null),
       fetch(CFG.runs + "merges.jsonl", { cache: "no-store" }).then((r) => (r.ok ? r.text() : "")).catch(() => ""),
     ]);
-    const latest = (web && web.latest) || git;
+    // The newest model run from either path decides the per-run metrics.
+    const cands = [web && web.latest, git].filter((r) => r && r.model_kind === "gemini");
+    const latest = cands.sort((a, b) => (a.started < b.started ? 1 : -1))[0] || null;
     const from = [];
     if (latest) from.push(`Latest model run: ${latest.run} (${latest.source === "github" ? "Git path" : "web"}, ${latest.model}).`);
     if (git) from.push(`Latest Git-path run: ${git.run}.`);

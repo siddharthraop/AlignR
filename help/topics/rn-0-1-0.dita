@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE reference PUBLIC "-//OASIS//DTD DITA Reference//EN" "reference.dtd">
+<reference id="rn-0-1-0" xml:lang="en-US">
+  <title>Release notes: <keyword keyref="product"/> <keyword keyref="version"/></title>
+  <shortdesc>The first release drafts the held-out TPU7x set on the web and from an issue.</shortdesc>
+  <refbody>
+    <section id="new"><title>New</title><ul>
+      <li>The drafting engine: find_siblings, load_facts, build_schema, generate_topic, serialise_dita, validate_grammar, check_rules and check_grounding.</li>
+      <li>The page: the scorecard, Draft, each draft beside the published topic, and the .zip download.</li>
+      <li>The Git path: an issue opens one draft pull request per topic, with statuses and a merge gate.</li>
+      <li>A copy-the-last-generation baseline that needs no model.</li></ul></section>
+    <section id="later"><title>Not in this release</title><ul>
+      <li>Vale style checks, the BigQuery edit log of preference pairs and the fine-tuning decision rule.</li>
+      <li>Task topics: the OASIS task shell doesn't compile in lxml yet; the TPU7x set has no task topic.</li></ul></section>
+  </refbody>
+</reference>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE reference PUBLIC "-//OASIS//DTD DITA Reference//EN" "reference.dtd">
+<reference id="r-facts-file" xml:lang="en-US">
+  <title>Launch facts file</title>
+  <shortdesc>The YAML fields in <filepath>facts/&lt;generation&gt;.yaml</filepath>.</shortdesc>
+  <refbody>
+    <properties id="fields">
+      <prophead><proptypehd>Field</proptypehd><propvaluehd>Example</propvaluehd><propdeschd>Meaning</propdeschd></prophead>
+      <property><proptype>generation</proptype><propvalue>tpu7x</propvalue><propdesc>The generation to draft; also its <xmlatt>platform</xmlatt> value.</propdesc></property>
+      <property><proptype>product_key</proptype><propvalue>product-tpu7x</propvalue><propdesc>The key that holds the product name.</propdesc></property>
+      <property><proptype>topic_prefix</proptype><propvalue>tpu7x-</propvalue><propdesc>File-name prefix of the new topics. Topics with this prefix are held out while drafting.</propdesc></property>
+      <property><proptype>siblings</proptype><propvalue>[v6e, v5p]</propvalue><propdesc>Earlier generations to draft from, most recent first.</propdesc></property>
+      <property><proptype>sources</proptype><propvalue>S1: {title, url}</propvalue><propdesc>Every source a value or statement cites.</propdesc></property>
+      <property><proptype>values</proptype><propvalue>{key, quantity, value, unit, source, table}</propvalue><propdesc>One value each. <codeph>table: spec</codeph> puts it in the specification table. A value with no key in the map becomes a key definition proposal.</propdesc></property>
+      <property><proptype>statements</proptype><propvalue>{id: F4, source: S3, text}</propvalue><propdesc>Short facts that aren't single values. Write keyed values as <codeph>{key}</codeph> and patterns in backticks.</propdesc></property>
+      <property><proptype>tables</proptype><propvalue>slice-shapes: {source, columns, rows}</propvalue><propdesc>Tabular facts, named by the table's <xmlatt>outputclass</xmlatt> in the siblings. The model labels the columns; the rows come from the file.</propdesc></property>
+      <property><proptype>new_topics</proptype><propvalue>{slot: memory, type: concept, facts: [F8, F9]}</propvalue><propdesc>Topics with no sibling. Each becomes a stub with questions.</propdesc></property>
+    </properties>
+  </refbody>
+</reference>

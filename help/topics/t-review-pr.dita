@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
+<task id="t-review-pr" xml:lang="en-US">
+  <title>Review and merge a draft pull request</title>
+  <shortdesc>Answer the draft's questions, edit what the prose needs, and merge when every status passes.
+    <keyword keyref="product"/> can't merge for you.</shortdesc>
+  <taskbody>
+    <steps>
+      <step><cmd>Read the report in the pull request description.</cmd><info><p><uicontrol>Questions</uicontrol> lists every
+        open draft comment, with who should answer it.</p></info></step>
+      <step><cmd>Get the answer to each engineer question, then edit the topic in
+        <filepath>drafts/&lt;generation&gt;/topics/</filepath>.</cmd></step>
+      <step><cmd>For each question you have answered, delete its <xmlelement>draft-comment</xmlelement> or set
+        <codeph>disposition="closed"</codeph>.</cmd></step>
+      <step><cmd>Edit the prose as you would any topic, and push to the pull request branch.</cmd><info><p>The
+        <codeph>gates</codeph> workflow runs the grammar, the rules and the open-questions check again on every push.</p></info></step>
+      <step><cmd>When every status passes, mark the pull request ready for review and merge it.</cmd><info><p>The merge is
+        recorded with its count of open questions, which feeds the scorecard.</p></info></step>
+    </steps>
+  </taskbody>
+</task>

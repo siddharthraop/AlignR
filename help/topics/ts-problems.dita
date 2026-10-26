@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
+<task id="ts-problems" xml:lang="en-US">
+  <title>Fix common problems</title>
+  <shortdesc>What to do when a draft, a status or the page doesn't do what you expect.</shortdesc>
+  <taskbody>
+    <steps-unordered>
+      <step><cmd>If the page says today's public drafts are used up, read the latest run it shows, or draft from an issue
+        instead.</cmd></step>
+      <step><cmd>If a topic is a stub, write it: it is new in this generation and has no sibling.</cmd><info><p>Each section's
+        draft comment lists the facts to cover.</p></info></step>
+      <step><cmd>If <codeph>alignr/grounding</codeph> fails after you edit, check every number you typed: give it a key, or
+        add the fact with its source to the facts file.</cmd></step>
+      <step><cmd>If <codeph>alignr/open-questions</codeph> fails, search the topic for <codeph>disposition="open"</codeph> and
+        close each question you have answered.</cmd></step>
+      <step><cmd>If <codeph>alignr/dita-ot</codeph> fails, run <codeph>alignr stage drafts/tpu7x/topics --to build/tpu</codeph>
+        and build <filepath>build/tpu/tpu.ditamap</filepath> with DITA-OT to see the message.</cmd></step>
+      <step><cmd>If a topic is withheld, report it as an issue: the serialiser should never write invalid DITA.</cmd></step>
+    </steps-unordered>
+  </taskbody>
+</task>

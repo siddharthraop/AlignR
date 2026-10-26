@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
+<task id="t-write-facts" xml:lang="en-US">
+  <title>Write a launch facts file</title>
+  <shortdesc>The facts file is the only input that changes from one generation to the next. It holds the values, units, short
+    statements and tables the hardware team supplies, each with a source ID.</shortdesc>
+  <taskbody>
+    <steps>
+      <step><cmd>Copy <filepath>facts/tpu7x.yaml</filepath> to <filepath>facts/&lt;generation&gt;.yaml</filepath>.</cmd></step>
+      <step><cmd>Set <codeph>generation</codeph>, <codeph>product_key</codeph>, <codeph>topic_prefix</codeph> and
+        <codeph>siblings</codeph>, most recent generation first.</cmd></step>
+      <step><cmd>Under <codeph>sources</codeph>, give each source an ID such as <codeph>S1</codeph>, a title and a
+        URL.</cmd></step>
+      <step><cmd>Under <codeph>values</codeph>, add one entry for each value, with its key, quantity, value, unit and source.
+        Mark the values that belong in the specification table with <codeph>table: spec</codeph>.</cmd>
+        <info><p>Use the same quantity name for a value stated twice in different units. <keyword keyref="product"/> converts
+          the units and turns a disagreement into a question.</p></info></step>
+      <step><cmd>Add <codeph>statements</codeph> and <codeph>tables</codeph> for facts that aren't single values. Write a
+        value that has a key as <codeph>{key}</codeph>.</cmd></step>
+      <step><cmd>List topics that are new in this generation under <codeph>new_topics</codeph>, with the statements they
+        should cover.</cmd></step>
+      <step><cmd>Run <codeph>alignr draft --facts facts/&lt;generation&gt;.yaml --model baseline</codeph> to check the file
+        without calling a model.</cmd></step>
+    </steps>
+    <postreq><p>See <xref href="r-facts-file.dita"/> for every field.</p></postreq>
+  </taskbody>
+</task>

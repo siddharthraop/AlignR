@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE reference PUBLIC "-//OASIS//DTD DITA Reference//EN" "reference.dtd">
+<reference id="r-glossary" xml:lang="en-US">
+  <title>Glossary</title>
+  <shortdesc>Terms the <keyword keyref="product"/> help uses.</shortdesc>
+  <refbody>
+    <section id="terms"><dl>
+      <dlentry><dt>sibling topic</dt><dd>A topic of the same type in the same place in the map, for an earlier generation.</dd></dlentry>
+      <dlentry><dt>launch facts file</dt><dd>The values, statements and tables for a new generation, each with a source ID.</dd></dlentry>
+      <dlentry><dt>key reference</dt><dd>A value defined once in a map and pulled into topics with <xmlatt>keyref</xmlatt>.</dd></dlentry>
+      <dlentry><dt>structured output</dt><dd>A Gemini API setting that makes the model return JSON that matches a JSON Schema.</dd></dlentry>
+      <dlentry><dt>draft comment</dt><dd>The DITA <xmlelement>draft-comment</xmlelement> element. AlignR uses it for open questions.</dd></dlentry>
+      <dlentry><dt>stub</dt><dd>A topic outline with questions, for a topic that has no sibling.</dd></dlentry>
+      <dlentry><dt>edit ratio</dt><dd>The share of tokens a writer must change to turn a draft into the published topic.</dd></dlentry>
+      <dlentry><dt>holdout</dt><dd>A generation whose published topics AlignR doesn't read while drafting, so they can grade the drafts.</dd></dlentry>
+      <dlentry><dt>baseline</dt><dd>A draft made by copying the most recent sibling and swapping its keys, with no model. The checks run on it too.</dd></dlentry>
+    </dl></section>
+  </refbody>
+</reference>

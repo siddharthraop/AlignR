@@ -1,0 +1,37 @@
+# Check AlignR the way a visitor uses it: the page loads, CORS allows it, the help is there, and a live draft works.
+name: live-check
+on:
+  workflow_dispatch:
+    inputs:
+      draft: {description: "Run one live draft (uses one of today's public drafts)", type: boolean, default: true}
+  workflow_run:
+    workflows: [deploy-api, pages]
+    types: [completed]
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Page, help, API and one draft
+        env:
+          SITE: https://siddharthraop.github.io/AlignR
+          API: https://alignr-api-622389218685.us-central1.run.app
+          DRAFT: ${{ github.event_name == 'workflow_dispatch' && inputs.draft || 'false' }}
+        run: |
+          sleep 30
+          for p in app/ help/ help/csh.json help/alignr-user-guide.pdf dev/; do
+            echo "::notice title=$p::$(curl -s -o /dev/null -w '%{http_code}' "$SITE/$p")"
+          done
+          echo "::notice title=CORS::$(curl -s -D - -o /dev/null -H 'Origin: https://siddharthraop.github.io' "$API/api/health" | grep -i '^access-control-allow-origin' | tr -d '\r')"
+          echo "::notice title=Health::$(curl -s -m 60 "$API/api/health" | jq -c .)"
+          if [ "$DRAFT" = "true" ]; then
+            curl -s -N -m 290 -X POST "$API/api/draft" -H 'Content-Type: application/json' -H 'Origin: https://siddharthraop.github.io' \
+              -d '{"generation":"tpu7x"}' > d.ndjson
+            tail -1 d.ndjson | jq -c '{type, run: .run.run, model: .run.model, seconds: .run.seconds, metrics: .run.metrics, usage: .run.usage}' > r.json || true
+            echo "::notice title=Draft::$(cat r.json)"
+            jq -e '.type == "result" and .metrics.grammar_failures_reaching_writer == 0' r.json
+            rid=$(jq -r .run r.json)
+            echo "::notice title=Zip::$(curl -s -o z.zip -w '%{http_code} %{size_download} bytes' "$API/api/runs/$rid/zip")"
+          fi
+          echo "::notice title=Scorecard::$(curl -s -m 60 "$API/api/scorecard" | jq -c '{runs, runs_with_cost, grammar_failures_reaching_writer, latest: .latest.run}')"

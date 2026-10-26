@@ -193,7 +193,7 @@ def scorecard():
     """The MVP metrics over the web run log. The Git-path metrics come from runs/latest-github.json."""
     runs = store.recent(50)
     model_runs = [r for r in runs if r.get("model_kind") == "gemini"]
-    latest = model_runs[0] if model_runs else (runs[0] if runs else None)
+    latest = model_runs[0] if model_runs else None   # the metrics are about model drafts, not the baseline
     return {
         "runs": len(runs), "runs_with_cost": sum(1 for r in runs if r.get("metrics", {}).get("cost_logged")
                                                 and "cost_usd" in r.get("usage", {})),

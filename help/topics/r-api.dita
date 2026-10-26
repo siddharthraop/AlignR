@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE reference PUBLIC "-//OASIS//DTD DITA Reference//EN" "reference.dtd">
+<reference id="r-api" xml:lang="en-US">
+  <title>API</title>
+  <shortdesc>The page calls the <keyword keyref="product"/> API on Cloud Run. The API runs the same engine as the
+    workflow.</shortdesc>
+  <refbody>
+    <table id="endpoints"><tgroup cols="3"><colspec colname="m"/><colspec colname="p"/><colspec colname="r"/>
+      <thead><row><entry>Request</entry><entry>Body or parameters</entry><entry>Returns</entry></row></thead>
+      <tbody>
+        <row><entry><codeph>POST /api/draft</codeph></entry><entry><codeph>{"generation": "tpu7x"}</codeph></entry><entry>A stream of newline-delimited JSON: one event per stage, then the run. 429 when the daily drafts are used up.</entry></row>
+        <row><entry><codeph>GET /api/runs/latest</codeph></entry><entry>None</entry><entry>The latest run</entry></row>
+        <row><entry><codeph>GET /api/runs/{id}</codeph></entry><entry>Run ID</entry><entry>One run, with each draft and the published topic</entry></row>
+        <row><entry><codeph>GET /api/runs/{id}/zip</codeph></entry><entry>Run ID</entry><entry>The drafts, the reports and the drafts map as a .zip</entry></row>
+        <row><entry><codeph>GET /api/scorecard</codeph></entry><entry>None</entry><entry>Run counts, runs with cost and the latest model run</entry></row>
+        <row><entry><codeph>GET /api/health</codeph></entry><entry>None</entry><entry>Version, model, generations, drafts used today and the daily cap</entry></row>
+      </tbody></tgroup></table>
+  </refbody>
+</reference>
