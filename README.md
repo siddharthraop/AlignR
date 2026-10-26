@@ -16,11 +16,17 @@ The model never writes XML, never invents a value, and never merges.
 
 ## Status
 
-Design document, version 0.1 (October 2026). This repository contains the
-design for a minimum viable product (MVP). The agent isn't built yet. The
-simulator in the design document is a scripted demo and doesn't call a model.
-Costs, token counts, and scorecard values in the design document are modeled,
-and they're labeled as modeled where they appear.
+Version 0.1.0, built and live (October 2026).
+
+- **Try it:** [the AlignR page](https://siddharthraop.github.io/AlignR/app/) shows the success metrics measured
+  on real runs, drafts the held-out TPU7x set on request, and puts each draft beside the page Google published.
+- **From an issue:** open a [New generation set](https://github.com/siddharthraop/AlignR/issues/new?template=new-generation-set.yml)
+  issue. AlignR opens one draft pull request per topic, with gate statuses and a merge gate on open questions.
+- **Docs:** [online help](https://siddharthraop.github.io/AlignR/help/) (DITA, with context-sensitive help on the
+  page), the [user guide (PDF)](https://siddharthraop.github.io/AlignR/help/alignr-user-guide.pdf) built from the same
+  topics, and the [developer docs](https://siddharthraop.github.io/AlignR/dev/) (MyST) with the ADRs.
+
+The simulator and the costs in the design document are modelled. The values on the AlignR page are measured.
 
 ## The problem
 
@@ -38,9 +44,10 @@ skeleton have drifted:
 | Configurations | Configurations | Supported configurations | Supported configurations |
 | VM section | VM, host and slice properties | VM types | TPU7x VM |
 
-Values drift too. The TPU7x page gives HBM capacity as **192 GiB** in its
-specification table and as **192 GB** in the memory hierarchy section below it.
-GiB and GB are different units. A value typed into prose can drift from the
+Values drift too. The TPU7x page gives HBM bandwidth as **7380 GBps** in its
+specification table and as **approximately 7.37 TB/s** in the memory hierarchy
+section below it. 7380 GBps is 7.38 TB/s. (The design document's earlier
+example, 192 GiB against 192 GB, is no longer on the live page.) A value typed into prose can drift from the
 table. A value stored as a DITA key can't.
 
 The usual ways to draft the next set each miss something:
@@ -107,7 +114,8 @@ team's DITA, with true values.
 ### Agent tools
 
 The agent is built with
-[Agent Development Kit](https://github.com/google/adk-docs). It has ten tools.
+[Agent Development Kit](https://github.com/google/adk-docs) in the design; version 0.1 runs the same ten tools as a
+plain Python loop with `google-genai` ([ADR 0001](docs/adr/0001-reuse-the-knowledgeflow-pattern.md)). It has ten tools.
 Only one of them calls the model.
 
 | Tool | Type | What it does |
@@ -141,7 +149,7 @@ conflict in the sources becomes a question, not a guess.
     <section id="memory"><title>Memory hierarchy</title>
       <p>Each chip has <ph keyref="tpu7x-hbm-capacity"/> of high-bandwidth memory (HBM).</p>
       <draft-comment author="alignr" disposition="open">
-        For the engineer: S1 gives HBM as 192 GiB. S2 gives 192 GB. Which unit is correct?
+        For the engineer: S1 gives HBM bandwidth as 7380 GBps; S2 gives approximately 7.37 TB/s. Which is correct?
       </draft-comment>
     </section>
   </refbody>
@@ -229,35 +237,34 @@ is acceptable for the MVP. Content sent on the free tier is used to improve
 Google products, so unreleased launch values need the paid tier
 ([Gemini API pricing](https://ai.google.dev/gemini-api/docs/pricing)).
 
-## View locally
+## Run it locally
 
-The design document is a single HTML page with no build step.
+```sh
+git clone --recurse-submodules https://github.com/siddharthraop/AlignR.git
+cd AlignR
+pip install -e '.[api,test]'
+corpus/tools/fetch_grammar.sh
+python -m pytest -q
+alignr draft --model baseline --out out/baseline     # no key needed; GOOGLE_API_KEY and --model gemini for Gemini
+```
 
-1.  Clone the repository:
-
-    ```sh
-    git clone https://github.com/siddharthraop/AlignR.git
-    cd AlignR
-    ```
-
-1.  Start a local web server:
-
-    ```sh
-    python3 -m http.server 8000
-    ```
-
-1.  In your browser, go to `http://localhost:8000`.
-
-You can also open `index.html` directly in a browser.
+See the [developer docs](https://siddharthraop.github.io/AlignR/dev/) for the API, the page and the DITA-OT build.
 
 ## Repository contents
 
-| File | Description |
-| ---- | ----------- |
-| `index.html` | The design document, published with GitHub Pages |
-| `README.md` | This file |
-| `LICENSE` | MIT License |
-| `.gitignore` | Files that Git ignores |
+| Path | Contents |
+| ---- | -------- |
+| `alignr/` | The engine: siblings, facts, schema, model, serialiser, checks, loop, comparison, CLI |
+| `api/` | FastAPI service on Cloud Run |
+| `app/` | The AlignR page |
+| `facts/tpu7x.yaml` | The TPU7x launch facts, each value with a source ID |
+| `corpus/` | [dita-corpus](https://github.com/siddharthraop/dita-corpus), the shared DITA source (submodule) |
+| `help/` | User help and user guide in DITA, and the context-sensitive help builder |
+| `docs/` | Developer docs and ADRs in MyST |
+| `runs/` | Run records from the Git path, read by the page |
+| `scripts/open_prs.py` | Draft pull requests, statuses and the run record |
+| `tests/` | Tests per topic type, with a scripted model |
+| `index.html` | The design document |
 
 ## Sample content and attribution
 
