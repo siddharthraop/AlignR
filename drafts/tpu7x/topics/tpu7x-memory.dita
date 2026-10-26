@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="tpu7x-memory" xml:lang="en-US">
+  <title>TPU7x memory architecture</title>
+  <shortdesc>Learn about the high-bandwidth memory (HBM) and host memory hierarchy on <keyword keyref="product-tpu7x"/>.</shortdesc>
+  <prolog>
+    <author type="contributor">AlignR draft, for review by a technical writer</author>
+    <critdates>
+      <created date="2026-10-26"/>
+    </critdates>
+    <metadata>
+      <audience type="ml-engineer"/>
+      <othermeta name="generated-by" content="alignr 0.1.0 · run 20261026-041740-4593 · schema 1b5a · model gemini-3.8-flash"/>
+    </metadata>
+    <data name="source" value="tpu7x" href="https://docs.cloud.google.com/tpu/docs/tpu7x" format="html" scope="external"/>
+    <data name="licence" value="CC BY 4.0. Drafted from Google Cloud TPU documentation (adapted and modified) and launch facts."/>
+  </prolog>
+  <conbody>
+    <draft-comment author="alignr" disposition="open" otherprops="for(writer) about(gap)">For the writer: This topic is new in tpu7x and has no sibling to draft from. AlignR wrote an outline with the facts each section should cover. Write the prose, then close this comment.</draft-comment>
+    <draft-comment author="alignr" disposition="open" otherprops="for(engineer) about(C1)">For the engineer: S1 lists the HBM bandwidth as {tpu7x-hbm-bandwidth} GBps (which equals 7.38 TB/s), while S2 reports it as approximately 7.37 TB/s. Which value is correct?</draft-comment>
+    <section id="s1">
+      <title>Dual-chiplet HBM architecture</title>
+      <draft-comment author="alignr" disposition="open" otherprops="for(writer) about(gap)">For the writer: write this section from F8 (S2): Each chip has two chiplets. Each chiplet has one TensorCore, two SparseCores and <keyword keyref="tpu7x-chiplet-hbm"/> GiB of HBM.</draft-comment>
+    </section>
+    <section id="s2">
+      <title>Host memory hierarchy</title>
+      <draft-comment author="alignr" disposition="open" otherprops="for(writer) about(gap)">For the writer: write this section from F9 (S2): Host memory connects to the chip with much lower bandwidth than HBM; it can hold offloaded activations or optimizer states.</draft-comment>
+    </section>
+  </conbody>
+</concept>
