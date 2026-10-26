@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="c-holdout" xml:lang="en-US">
+  <title>The holdout and the edit ratio</title>
+  <shortdesc>The published TPU7x topics are the answer key. <keyword keyref="product"/> never reads them while drafting, and
+    compares each draft with them afterward.</shortdesc>
+  <conbody>
+    <p>The sample DITA set (dita-corpus) holds four TPU generations. TPU7x is the newest, so it plays the new generation.
+      While drafting, <keyword keyref="product"/> refuses to open any topic whose file name starts with
+      <filepath>tpu7x-</filepath>, and the comparison topic that lists every generation. A test proves that no sentence from
+      those topics reaches the model.</p>
+    <p>After drafting, the evaluator renders both topics as a reader sees them: keys resolved, reused notes expanded and
+      draft comments left out. It splits each into word and punctuation tokens and counts the tokens a writer must insert,
+      delete or replace to turn the draft into the published text. The <term>edit ratio</term> is that count divided by the
+      length of the longer of the two. 0% means identical.</p>
+    <p>Only topics that have a sibling count toward the target. A stub for a concept that is new in the generation is shown
+      with its edit ratio, but it is a set of questions, not a draft.</p>
+    <note>The published topics are adapted from Google's TPU7x page under CC BY 4.0. They are what the comparison uses; the
+      page link on each draft opens Google's current page.</note>
+  </conbody>
+</concept>

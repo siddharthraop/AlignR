@@ -60,7 +60,7 @@ def cmd_stage(a):
     dst = Path(a.to)
     if dst.exists():
         shutil.rmtree(dst)
-    shutil.copytree(src, dst, ignore=shutil.ignore_patterns("media"))
+    shutil.copytree(src, dst)
     for f in Path(a.drafts).glob("*.dita"):
         shutil.copy(f, dst / "topics" / f.name)
     print(f"Staged {dst} with {len(list(Path(a.drafts).glob('*.dita')))} drafts")

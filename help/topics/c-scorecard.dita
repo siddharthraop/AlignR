@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="c-scorecard" xml:lang="en-US">
+  <title>How you know it works</title>
+  <shortdesc><keyword keyref="product"/> holds out TPU7x. It drafts the TPU7x topics from the v5p and v6e topics and the
+    TPU7x values, and then compares each draft with the page that Google published. Six measured values decide whether the
+    MVP works.</shortdesc>
+  <prolog><resourceid appname="alignr-app" appid="scorecard"/></prolog>
+  <conbody>
+    <p>The table at the top of the page shows each target beside the value the latest runs measured. Every value comes from a
+      check result or a run record, not from a judgment.</p>
+    <table id="metrics">
+      <tgroup cols="3">
+        <colspec colname="m"/><colspec colname="t"/><colspec colname="h"/>
+        <thead><row><entry>Metric</entry><entry>MVP target</entry><entry>How it is measured</entry></row></thead>
+        <tbody>
+          <row><entry>Drafts that reach a writer and fail the DITA grammar</entry><entry>0</entry><entry>Every logged run counts
+            the topics it emitted that fail the OASIS DITA RELAX NG grammar. A topic that fails is withheld, so it never
+            reaches a writer.</entry></row>
+          <row><entry>Values with a key or a source</entry><entry>100%</entry><entry>The grounding check counts every value
+            in the drafts: key references, table cells and any number typed into prose. A value counts as sourced when it is
+            a key, or when it matches a fact with the same unit.</entry></row>
+          <row><entry>Edit ratio on topics that have a sibling</entry><entry>Under <keyword keyref="edit-target"/></entry>
+            <entry>The share of tokens a writer must change to turn the draft into the published TPU7x topic. See
+            <xref href="c-holdout.dita"/>.</entry></row>
+          <row><entry>Time from issue to draft pull requests for the set</entry><entry>Under
+            <keyword keyref="time-target"/></entry><entry>From the time the issue is opened to the time the last draft pull
+            request opens, from the latest Git-path run record.</entry></row>
+          <row><entry>Open questions at merge</entry><entry>0</entry><entry>Open draft comments in the drafts when a pull
+            request merges, from the merge record. The <codeph>alignr/open-questions</codeph> status blocks a merge while any
+            is open.</entry></row>
+          <row><entry>Runs with logged cost</entry><entry>100%</entry><entry>Runs whose record holds model calls, tokens and
+            cost.</entry></row>
+        </tbody>
+      </tgroup>
+    </table>
+    <p>A status of <uicontrol>Pending</uicontrol> means that nothing has measured the value yet, for example no draft pull
+      request has merged.</p>
+    <section id="limits">
+      <title>Known limits</title>
+      <p><keyword keyref="product"/> drafts what has a sibling. A concept that's new in a generation, such as the TPU7x
+        dual-chiplet design, gets a stub with questions instead of prose. lxml checks the grammar but doesn't apply the
+        default attribute values that DITA processing needs, so DITA-OT still builds every topic in CI.</p>
+    </section>
+  </conbody>
+</concept>

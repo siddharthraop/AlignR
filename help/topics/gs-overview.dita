@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="gs-overview" xml:lang="en-US">
+  <title>What <keyword keyref="product"/> does</title>
+  <shortdesc><keyword keyref="product"/> drafts the DITA topics for a new hardware generation from the topics you already
+    have, and checks every draft against the DITA grammar and your house rules before a writer sees it.</shortdesc>
+  <prolog><resourceid appname="alignr-app" appid="overview"/></prolog>
+  <conbody>
+    <p>Each new generation of a product needs a set of topics with the same structure as the last one and new values. Writers
+      usually copy the previous set and edit it by hand, so labels drift and values get typed twice.
+      <keyword keyref="product"/> does the copying with checks:</p>
+    <ol>
+      <li>It finds the <term>sibling topics</term>: the topics of the same type in the same place in the DITA map, for earlier
+        generations.</li>
+      <li>It reads the new values from a <term>launch facts file</term>. Each value has a source ID and a unit.</li>
+      <li>It asks <keyword keyref="model"/> to fill a JSON Schema built for that one topic. The model never writes XML.</li>
+      <li>Python writes the DITA XML. Every value becomes a key reference, and every open question becomes a
+        <xmlelement>draft-comment</xmlelement>.</li>
+      <li>The draft passes the DITA grammar, the house rules and a grounding check. A field that fails is revised up to
+        <keyword keyref="max-revisions"/> times, and then becomes a question for a person.</li>
+      <li>Each draft reaches a writer as a draft pull request. <keyword keyref="product"/> can't merge.</li>
+    </ol>
+    <p>You can use <keyword keyref="product"/> two ways. On <xref keyref="app-url"/>, you draft the held-out TPU7x set and
+      compare each draft with the page Google published. In <xref keyref="repo-url"/>, you open an issue and receive one draft
+      pull request per topic.</p>
+  </conbody>
+</concept>

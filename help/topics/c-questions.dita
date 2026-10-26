@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="c-questions" xml:lang="en-US">
+  <title>Questions instead of guesses</title>
+  <shortdesc>Where the sources conflict, or don't say, a draft carries a question in a
+    <xmlelement>draft-comment</xmlelement> element. DITA processors don't render draft comments by default, and the merge
+    gate fails while any is open, so a question can't ship by accident.</shortdesc>
+  <conbody>
+    <p>Each question names who should answer it: the engineer for values, the writer for wording and structure. The TPU7x set
+      has two real conflicts:</p>
+    <ul>
+      <li><b>Sibling units (KI-1).</b> The v6e topic gives HBM capacity in GB; the v5p topic gives it in GiB. The TPU7x facts use
+        GiB. The writer confirms the unit and corrects the sibling that is wrong.</li>
+      <li><b>Two values for one quantity (KI-2).</b> The TPU7x specification table gives HBM bandwidth as 7380 GBps, which is
+        7.38 TB/s. The memory section says approximately 7.37 TB/s. The engineer says which is right.</li>
+    </ul>
+    <p>If the model doesn't ask about a conflict, <keyword keyref="product"/> adds the question itself. A topic that is new in
+      the generation, with no sibling, is a <term>stub</term>: a title, a short description, an outline of sections and, in
+      each section, the facts it should cover.</p>
+    <p>To answer a question, edit the topic and delete the <xmlelement>draft-comment</xmlelement>, or set its
+      <xmlatt>disposition</xmlatt> attribute to <codeph>closed</codeph>.</p>
+  </conbody>
+</concept>

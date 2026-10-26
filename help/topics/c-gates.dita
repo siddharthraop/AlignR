@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="c-gates" xml:lang="en-US">
+  <title>The gates a draft passes</title>
+  <shortdesc>A draft reaches a writer only after two schema gates and two checks. Code fixes what code can fix, and the model
+    is asked again only about the fields that still fail.</shortdesc>
+  <conbody>
+    <dl>
+      <dlentry><dt>Gate 1: JSON Schema</dt><dd>The Gemini API must return JSON that matches a schema built for this topic and
+        run. The schema lists only the keys, source IDs, reusable notes and conflicts that exist, and fixes the number of spec
+        rows and table columns. <keyword keyref="product"/> checks the shape again in code, for every model.</dd></dlentry>
+      <dlentry><dt>Safe fixes</dt><dd>A literal value that a key holds becomes the key reference. A title in title case
+        becomes sentence case. The topic ID follows the house pattern.</dd></dlentry>
+      <dlentry><dt>Gate 2: the DITA grammar</dt><dd>The XML must be valid against the OASIS DITA 1.3 RELAX NG grammar,
+        checked with lxml.</dd></dlentry>
+      <dlentry><dt>House rules</dt><dd>ISO Schematron rules from the corpus and from <keyword keyref="product"/>: spec values
+        are keys, a table uses its siblings' header, every draft records its run.</dd></dlentry>
+      <dlentry><dt>Grounding</dt><dd>Every number, unit, flag, command and key matches a fact, and every paragraph cites the
+        sources it uses. GiB against GB fails.</dd></dlentry>
+    </dl>
+    <p>When a field fails, the model revises only that field, up to <keyword keyref="max-revisions"/> times. A field that
+      still fails becomes a question. A topic that fails the grammar after that is withheld.</p>
+  </conbody>
+</concept>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE map PUBLIC "-//OASIS//DTD DITA Map//EN" "map.dtd">
+<!-- Product names and limits that the help states more than once. Change them here only. -->
+<map id="alignr-keys">
+  <title>AlignR help keys</title>
+  <keydef keys="product"><topicmeta><keywords><keyword>AlignR</keyword></keywords></topicmeta></keydef>
+  <keydef keys="version"><topicmeta><keywords><keyword>0.1.0</keyword></keywords></topicmeta></keydef>
+  <keydef keys="model"><topicmeta><keywords><keyword>Gemini 3.8 Flash</keyword></keywords></topicmeta></keydef>
+  <keydef keys="max-revisions"><topicmeta><keywords><keyword>2</keyword></keywords></topicmeta></keydef>
+  <keydef keys="daily-cap"><topicmeta><keywords><keyword>20</keyword></keywords></topicmeta></keydef>
+  <keydef keys="edit-target"><topicmeta><keywords><keyword>40%</keyword></keywords></topicmeta></keydef>
+  <keydef keys="time-target"><topicmeta><keywords><keyword>15 minutes</keyword></keywords></topicmeta></keydef>
+  <keydef keys="app-url" href="https://siddharthraop.github.io/AlignR/app/" scope="external" format="html"><topicmeta><linktext>the AlignR page</linktext></topicmeta></keydef>
+  <keydef keys="repo-url" href="https://github.com/siddharthraop/AlignR" scope="external" format="html"><topicmeta><linktext>the AlignR repository</linktext></topicmeta></keydef>
+  <keydef keys="new-issue-url" href="https://github.com/siddharthraop/AlignR/issues/new?template=new-generation-set.yml" scope="external" format="html"><topicmeta><linktext>New generation set</linktext></topicmeta></keydef>
+</map>
