@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE reference PUBLIC "-//OASIS//DTD DITA Reference//EN" "reference.dtd">
+<reference id="tpu7x-vm-types" xml:lang="en-US">
+  <title><keyword keyref="product-tpu7x"/> VM types</title>
+  <shortdesc>The VM types available for <keyword keyref="product-tpu7x"/> and the host resources each one provides.</shortdesc>
+  <prolog>
+    <author type="contributor">AlignR draft, for review by a technical writer</author>
+    <critdates>
+      <created date="2026-10-26"/>
+    </critdates>
+    <metadata>
+      <audience type="ml-engineer"/>
+      <othermeta name="generated-by" content="alignr 0.1.0 · run 20261026-041740-4593 · schema 0f4d · model gemini-3.8-flash"/>
+    </metadata>
+    <data name="source" value="tpu7x" href="https://docs.cloud.google.com/tpu/docs/tpu7x" format="html" scope="external"/>
+    <data name="licence" value="CC BY 4.0. Drafted from Google Cloud TPU documentation (adapted and modified) and launch facts."/>
+    <data name="siblings" value="tpu-v6e-vm-types.dita tpu-v5p-vm-types.dita"/>
+  </prolog>
+  <refbody>
+    <section id="vm-types">
+      <title>VM types</title>
+      <table outputclass="vm-types">
+        <tgroup cols="4">
+          <colspec colname="c1"/>
+          <colspec colname="c2"/>
+          <colspec colname="c3"/>
+          <colspec colname="c4"/>
+          <thead>
+            <row>
+              <entry>Machine type</entry>
+              <entry>Chips per VM</entry>
+              <entry>vCPUs</entry>
+              <entry>RAM (GB)</entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry><keyword keyref="tpu7x-machine-type"/></entry>
+              <entry><keyword keyref="tpu7x-chips-per-vm"/></entry>
+              <entry><keyword keyref="tpu7x-vcpus-4chip"/></entry>
+              <entry><keyword keyref="tpu7x-ram-4chip"/></entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+  </refbody>
+</reference>
