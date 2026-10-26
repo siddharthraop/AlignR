@@ -1,0 +1,23 @@
+name: tests
+on:
+  push:
+    branches: [main]
+    paths: ["alignr/**", "api/**", "tests/**", "facts/**", "pyproject.toml", "corpus", ".github/workflows/tests.yml"]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with: {submodules: true}
+      - uses: actions/setup-python@v6
+        with: {python-version: "3.12"}
+      - run: pip install -q -e '.[api,test]'
+      - run: corpus/tools/fetch_grammar.sh
+      - run: python -m pytest -q
+      - name: Baseline set (no model) passes the gates
+        run: |
+          alignr draft --model baseline --out out/baseline
+          alignr check out/baseline/topics/*.dita

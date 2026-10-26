@@ -1,0 +1,23 @@
+name: New generation set
+description: Ask AlignR to draft the topic set for a new hardware generation. It opens one draft pull request per topic.
+title: "Draft the TPU7x topic set"
+labels: ["alignr:draft-set"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        AlignR drafts each topic from its sibling topics in earlier generations and the launch facts file below.
+        Every draft passes the DITA grammar, every value is a key reference with a source, and every conflict in the
+        sources is a `<draft-comment>` question. AlignR can't merge: a writer reviews each pull request.
+  - type: input
+    id: facts
+    attributes:
+      label: Launch facts file
+      description: Path in this repository. The file names the generation, its sibling generations and its values.
+      value: facts/tpu7x.yaml
+    validations: {required: true}
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes for the writer
+      description: Optional. Copied into each pull request.

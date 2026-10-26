@@ -1,0 +1,81 @@
+# Launch facts for the TPU7x topic set: the input AlignR drafts from.
+#
+# This is what a hardware team hands the writers before launch: values, units, short statements and the
+# supported shapes, each with a source ID. It holds no prose from the published TPU7x topics. Every value
+# was read from Google's TPU7x page on the "checked" date (dita-corpus sources/sources.yaml, source tpu7x).
+#
+# Values that already have a key in corpus/tpu/keys/tpu-keys.ditamap name it; load_facts checks that the
+# key's value matches. A value with no key becomes a key definition proposal.
+
+generation: tpu7x
+product_key: product-tpu7x
+topic_prefix: tpu7x-
+platform: tpu7x
+siblings: [v6e, v5p]          # most recent first; the design drafts TPU7x from v5p and v6e
+checked: 2026-10-24
+page: https://docs.cloud.google.com/tpu/docs/tpu7x
+
+sources:
+  S1: {title: "TPU7x page, system architecture table", url: "https://docs.cloud.google.com/tpu/docs/tpu7x"}
+  S2: {title: "TPU7x page, memory hierarchy section", url: "https://docs.cloud.google.com/tpu/docs/tpu7x"}
+  S3: {title: "TPU7x page, supported configurations", url: "https://docs.cloud.google.com/tpu/docs/tpu7x"}
+  S4: {title: "TPU7x page, TPU7x VM section", url: "https://docs.cloud.google.com/tpu/docs/tpu7x"}
+  S5: {title: "TPU7x page, introduction and notes", url: "https://docs.cloud.google.com/tpu/docs/tpu7x"}
+
+# quantity: what is measured, shared across generations (the key suffix). table: spec puts it in the spec table.
+values:
+  - {key: tpu7x-chips-per-pod,  quantity: chips-per-pod,  value: "9216", unit: "",       source: S1, table: spec}
+  - {key: tpu7x-peak-bf16,      quantity: peak-bf16,      value: "2307", unit: TFLOPs,   source: S1, table: spec}
+  - {key: tpu7x-peak-fp8,       quantity: peak-fp8,       value: "4614", unit: TFLOPs,   source: S1, table: spec}
+  - {key: tpu7x-hbm-capacity,   quantity: hbm-capacity,   value: "192",  unit: GiB,      source: S1, table: spec}
+  - {key: tpu7x-hbm-bandwidth,  quantity: hbm-bandwidth,  value: "7380", unit: GBps,     source: S1, table: spec}
+  - {key: tpu7x-tensorcores,    quantity: tensorcores,    value: "2",    unit: "",       source: S1, table: spec}
+  - {key: tpu7x-sparsecores,    quantity: sparsecores,    value: "4",    unit: "",       source: S1, table: spec}
+  - {key: tpu7x-ici-bandwidth,  quantity: ici-bandwidth,  value: "1200", unit: GBps,     source: S1, table: spec}
+  - {key: tpu7x-dcn-per-chip,   quantity: dcn-per-chip,   value: "100",  unit: Gbps,     source: S1, table: spec}
+  - {key: tpu7x-machine-type,   quantity: machine-type,   value: "tpu7x-standard-4t", unit: "", source: S4}
+  - {key: tpu7x-chips-per-vm,   quantity: chips-per-vm,   value: "4",    unit: "",       source: S4}
+  - {key: tpu7x-vcpus-4chip,    quantity: vcpus-4chip,    value: "224",  unit: "",       source: S4}
+  - {key: tpu7x-ram-4chip,      quantity: ram-4chip,      value: "960",  unit: GB,       source: S4}
+  - {key: tpu7x-max-api-slice,  quantity: max-api-slice,  value: "2048", unit: chips,    source: S3}
+  - {key: tpu7x-chiplet-hbm,    quantity: chiplet-hbm,    value: "96",   unit: GiB,      source: S2}
+  # The memory section states the bandwidth again, in another unit. load_facts compares the two (KI-2).
+  - {quantity: hbm-bandwidth, value: "7.37", unit: TB/s, approx: true, source: S2}
+
+statements:
+  - {id: F1, source: S5, text: "{product-tpu7x} is for the largest training and inference workloads."}
+  - {id: F2, source: S5, text: "The Cloud TPU API is not supported on {product-tpu7x}. Create capacity with GKE or Compute Engine."}
+  - {id: F3, source: S5, text: "JAX and PyTorch are supported on {product-tpu7x}. TensorFlow is not."}
+  - {id: F4, source: S3, text: "Slice shapes take the form `AxBxC`; each dimension is a multiple of 4, up to {tpu7x-chips-per-pod} chips."}
+  - {id: F5, source: S3, text: "Every slice shape uses the {tpu7x-machine-type} machine type."}
+  - {id: F6, source: S3, text: "Slices larger than {tpu7x-max-api-slice} chips need a request to the account team."}
+  - {id: F7, source: S4, text: "Each set of four chips connects to one CPU host. Every slice uses full-host VMs of {tpu7x-chips-per-vm} chips."}
+  - {id: F8, source: S2, text: "Each chip has two chiplets. Each chiplet has one TensorCore, two SparseCores and {tpu7x-chiplet-hbm} GiB of HBM."}
+  - {id: F9, source: S2, text: "Host memory connects to the chip with much lower bandwidth than HBM; it can hold offloaded activations or optimizer states."}
+  - {id: F10, source: S1, text: "See the memory hierarchy topic for the memory layout of each chip."}
+
+# Tables the launch team supplies as data. Columns are what each column means; the writer (or the model) labels them.
+tables:
+  slice-shapes:
+    source: S3
+    columns: [slice shape, number of chips, number of hosts, number of VMs, number of cubes, scope]
+    rows:
+      - ["2x2x1", "4", "1", "1", "1/16", "Single-host"]
+      - ["2x2x2", "8", "2", "2", "1/8", "Multi-host"]
+      - ["2x2x4", "16", "4", "4", "1/4", "Multi-host"]
+      - ["2x4x4", "32", "8", "8", "1/2", "Multi-host"]
+      - ["4x4x4", "64", "16", "16", "1", "Multi-host"]
+      - ["4x4x8", "128", "32", "32", "2", "Multi-host"]
+      - ["4x8x8", "256", "64", "64", "4", "Multi-host"]
+      - ["8x8x8", "512", "128", "128", "8", "Multi-host"]
+      - ["8x8x16", "1024", "256", "256", "16", "Multi-host"]
+      - ["8x16x16", "2048", "512", "512", "32", "Multi-host"]
+  vm-types:
+    source: S4
+    columns: [machine type, chips per VM, vCPUs, RAM in GB]
+    rows:
+      - ["{tpu7x-machine-type}", "{tpu7x-chips-per-vm}", "{tpu7x-vcpus-4chip}", "{tpu7x-ram-4chip}"]
+
+# Topics with no sibling in earlier generations. AlignR writes a stub with questions, not prose.
+new_topics:
+  - {slot: memory, type: concept, about: "how HBM and host memory are organized on a TPU7x chip, including the dual-chiplet design", facts: [F8, F9]}

@@ -1,0 +1,81 @@
+# The Git path: an issue asks for a generation's topic set; AlignR drafts it and opens one draft pull request per topic.
+name: alignr
+on:
+  issues:
+    types: [opened]
+  workflow_dispatch:
+    inputs:
+      facts: {description: "Launch facts file", default: "facts/tpu7x.yaml"}
+      open_prs: {description: "Open draft pull requests", type: boolean, default: false}
+concurrency:
+  group: alignr-${{ github.event.issue.number || github.run_id }}
+permissions:
+  contents: write        # push the draft branches and the run record
+  pull-requests: write   # open the draft pull requests (this account can't merge)
+  issues: write          # report back on the issue
+  statuses: write        # the gate statuses on each pull request
+  id-token: write        # Workload Identity Federation, to read the Gemini key
+jobs:
+  draft:
+    if: github.event_name == 'workflow_dispatch' || contains(github.event.issue.labels.*.name, 'alignr:draft-set')
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+        with: {submodules: true, fetch-depth: 0}
+      - uses: actions/setup-python@v6
+        with: {python-version: "3.12"}
+      - run: pip install -q -e .
+      - run: corpus/tools/fetch_grammar.sh
+      - name: Facts file from the issue form
+        id: facts
+        env:
+          BODY: ${{ github.event.issue.body }}
+          INPUT: ${{ inputs.facts }}
+        run: |
+          f="${INPUT:-$(printf '%s\n' "$BODY" | awk '/^### Launch facts file/{getline; getline; print; exit}')}"
+          f="${f:-facts/tpu7x.yaml}"
+          case "$f" in facts/*.yaml) ;; *) echo "::error::facts file must be facts/<name>.yaml"; exit 1;; esac
+          test -f "$f" && echo "path=$f" >> "$GITHUB_OUTPUT"
+      - uses: google-github-actions/auth@v3
+        with:
+          project_id: ${{ vars.GCP_PROJECT }}
+          workload_identity_provider: ${{ vars.GCP_WIF_PROVIDER }}
+          service_account: ${{ vars.GCP_DEPLOY_SA }}
+      - id: secrets
+        uses: google-github-actions/get-secretmanager-secrets@v2
+        with:
+          secrets: gemini:${{ vars.GCP_PROJECT }}/gemini-api-key
+      - name: Draft the set
+        env:
+          GOOGLE_API_KEY: ${{ steps.secrets.outputs.gemini }}
+          ALIGNR_MODEL: ${{ vars.ALIGNR_MODEL || 'gemini-3.8-flash' }}
+        run: alignr draft --facts "${{ steps.facts.outputs.path }}" --model gemini --source github --out out/run -v 2> out-events.ndjson
+      - uses: actions/setup-java@v4
+        with: {distribution: temurin, java-version: "21"}
+      - id: dita-cache
+        uses: actions/cache@v4
+        with: {path: ~/dita-ot-4.4, key: dita-ot-4.4}
+      - if: steps.dita-cache.outputs.cache-hit != 'true'
+        run: curl -sSL -o /tmp/dita.zip https://github.com/dita-ot/dita-ot/releases/download/4.4/dita-ot-4.4.zip && unzip -q /tmp/dita.zip -d ~
+      - name: DITA-OT builds the set with the drafts in place (strict)
+        id: ditaot
+        run: |
+          alignr stage out/run/topics --to build/tpu
+          if ~/dita-ot-4.4/bin/dita -i build/tpu/tpu.ditamap -f html5 -o build/html --processing-mode=strict; then
+            echo "result=success" >> "$GITHUB_OUTPUT"; else echo "result=failure" >> "$GITHUB_OUTPUT"; fi
+      - name: Draft pull requests, statuses, issue comment and run record
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python scripts/open_prs.py out/run --issue "${{ github.event.issue.number || 0 }}" \
+            --dita-ot "${{ steps.ditaot.outputs.result }}" \
+            --open-prs "${{ github.event_name == 'issues' && 'true' || inputs.open_prs }}"
+          cat out/run/report.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v5
+        if: always()
+        with:
+          name: alignr-run
+          path: |
+            out/run/
+            out-events.ndjson

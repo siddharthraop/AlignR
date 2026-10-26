@@ -1,0 +1,48 @@
+# The same gates on every change a writer pushes to a draft, and the merge record.
+name: gates
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review, closed]
+    paths: ["drafts/**"]
+permissions:
+  contents: write
+  statuses: write
+jobs:
+  gates:
+    if: github.event.action != 'closed'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with: {submodules: true}
+      - uses: actions/setup-python@v6
+        with: {python-version: "3.12"}
+      - run: pip install -q -e . && corpus/tools/fetch_grammar.sh
+      - name: Grammar, rules and open questions
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set +e
+          alignr check drafts/*/topics/*.dita; g=$?
+          alignr check drafts/*/topics/*.dita --merge > merge.txt; q=$?
+          cat merge.txt
+          n=$(grep -o '[0-9]* open questions' merge.txt | awk '{s+=$1} END {print s+0}')
+          st() { gh api "repos/$GITHUB_REPOSITORY/statuses/$SHA" -f state="$1" -f context="$2" -f description="$3" >/dev/null; }
+          [ $g -eq 0 ] && st success alignr/grammar "valid DITA, rules pass" || st failure alignr/grammar "grammar or rule errors"
+          [ $n -eq 0 ] && st success alignr/open-questions "0 open draft comments" || st failure alignr/open-questions "$n open draft comment(s): close them before merging"
+          exit $g
+  merged:
+    if: github.event.action == 'closed' && github.event.pull_request.merged
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with: {ref: main}
+      - name: Record open questions at merge
+        env:
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          n=$(grep -ho 'disposition="open"' drafts/*/topics/*.dita 2>/dev/null | wc -l)
+          mkdir -p runs
+          echo "{\"pr\": $PR, \"merged\": \"$(date -u +%FT%TZ)\", \"open_questions\": $n}" >> runs/merges.jsonl
+          git config user.name "github-actions[bot]"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add runs/merges.jsonl && git commit -qm "Merge record for #$PR: $n open questions" && git push -q origin main
